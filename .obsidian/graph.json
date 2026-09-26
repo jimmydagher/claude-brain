@@ -1,0 +1,65 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "tag:#memory/core",
+      "color": {
+        "a": 1,
+        "rgb": 2783446
+      }
+    },
+    {
+      "query": "tag:#memory/technical",
+      "color": {
+        "a": 1,
+        "rgb": 33536
+      }
+    },
+    {
+      "query": "tag:#memory/thinking",
+      "color": {
+        "a": 1,
+        "rgb": 1814394
+      }
+    },
+    {
+      "query": "tag:#memory/communication",
+      "color": {
+        "a": 1,
+        "rgb": 13206784
+      }
+    },
+    {
+      "query": "tag:#project",
+      "color": {
+        "a": 1,
+        "rgb": 14895432
+      }
+    },
+    {
+      "query": "tag:#hippocampus  ",
+      "color": {
+        "a": 1,
+        "rgb": 5984992
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.495261259750063,
+  "repelStrength": 16.2794790566702,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 0.713275456876388,
+  "close": true
+}

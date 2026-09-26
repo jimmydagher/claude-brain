@@ -1,0 +1,18 @@
+# Obsidian: keep the shareable settings (app, appearance, graph colors, core and community plugin lists)
+# Per-device window layout and recent files; changes on every click
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+# Installed plugins: third-party code reinstalled from the store; plugin data can hold secrets (MCP Connector's bearer token is in its data.json)
+.obsidian/plugins/
+
+# Obsidian's local trash
+.trash/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code personal settings and Python caches
+.claude/settings.local.json
+__pycache__/
