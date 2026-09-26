@@ -74,10 +74,10 @@ Your harness needs to know where the vault lives. Pick one:
 
 - **Claude Code skill (recommended):** save this as `~/.claude/skills/cortex/SKILL.md`. Until it's used, it costs only its one-line description, and it also works as `/cortex`.
 
-  ```markdown
+  ```
   ---
-  name: cortex
-  description: Loads the claude-brain second brain. Use when the user says "use the cortex", "use your brain" or runs /cortex.
+	name: cortex
+	description: Loads the claude-brain second brain. Use when the user says "use the cortex", "use your brain" or runs /cortex.
   ---
   Read `<vault path>/CORTEX.md` once, reply `Brain: on`, and follow it for the rest of this session.
   ```

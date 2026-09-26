@@ -34,6 +34,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 - Files meant for GitHub (README) use relative Markdown links, since GitHub doesn't render wikilinks. External links: `[descriptive text](url)`, never "click here" or a bare URL.
 - Bold sparingly for key terms, never as a fake heading.
 - YAML frontmatter only at the very top; HTML only for comments (`<!-- -->`).
+- A Markdown file a script writes (e.g. a CHANGELOG rendered by a release script) takes its format from the script: fix the generator, never hand-edit its output, or the next run undoes the edit.
 
 ## Tags
 - Every brain note starts with a `tags` property (YAML list); the graph colors come from it (`.obsidian/graph.json`).
