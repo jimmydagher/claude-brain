@@ -21,7 +21,8 @@ flowchart LR
 - **CORTEX.md** is the entry point: a routing table, the always-on rules (led by 7 non-negotiable token-economy rules) and the rules for updating the brain. It loads once per session.
 - **MEMORY/** has one instruction file per area. The AI opens only the file the task needs, so a typical task loads about 1,500–2,500 tokens of instructions.
 - **PROJECTS/** holds per-project context: goal, status, a short `## Now`, decisions, next actions.
-- **HIPPOCAMPUS/** is where new information waits before it becomes memory: SYNAPSE.md holds numbered proposals (HX0001, HX0002…), and ENGRAM.md keeps the trail of what was committed or rejected.
+- **CEREBELLUM/** is your own layer: personal preferences, environment facts, style and mindset, kept apart from the shared rules in MEMORY. You own it; entries arrive through SYNAPSE, and `CEREBELLUM/MAP.md` says which sections each area loads. The scope ladder and routing tests are in [CEREBELLUM/CEREBELLUM.md](CEREBELLUM/CEREBELLUM.md).
+- **HIPPOCAMPUS/** is where new information waits before it becomes memory: SYNAPSE.md holds numbered proposals (HX0001, HX0002…), and ENGRAM.md keeps the trail of what was committed or rejected. Both are in-transit files that git doesn't track; [HIPPOCAMPUS/HIPPOCAMPUS.md](HIPPOCAMPUS/HIPPOCAMPUS.md) holds their templates, so a clone recreates them on first use.
 
 Every area file has the same shape: tags, a scope line, Core Rules, Defaults, Avoid and Output. Corrections don't pile up as add-ons: committing one rewrites the rule it changes, so no two rules compete at read time.
 
@@ -61,6 +62,7 @@ Every note carries one tag, and `.obsidian/graph.json` colors the graph by tag:
 | `memory/communication` | WRITING, LANGUAGE, VISUAL, BUSINESS, ASSISTANT | gold `#c98500` |
 | `project`, `project/<name>` | the PROJECTS index and every project note | red `#e34948` |
 | `hippocampus` | SYNAPSE, ENGRAM | uncolored: not memory yet |
+| `memory/personal` | everything in CEREBELLUM | uncolored: a personal layer |
 
 The five colors were checked against Obsidian's light and dark backgrounds and for color-blind vision. A sixth color would clash with one of them, so new areas join an existing family.
 
@@ -101,7 +103,7 @@ Your harness needs to know where the vault lives. Pick one:
 ## Make it yours
 
 - CODING RULE#1 points to my own standards skill (`/sdsi:core`) and RULE#4 to the Graphify skill; swap in your own.
-- PROJECTS/ holds my projects; replace them with yours. If your repo is public and your projects aren't, add `PROJECTS/` to `.gitignore`.
+- `.gitignore` keeps `PROJECTS/`, `.remember/`, and all of `CEREBELLUM/` and `HIPPOCAMPUS/` except their guides out of the repo, so a clone starts with none of them. Create your own: projects from the template in [MEMORY/PROJECTS.md](MEMORY/PROJECTS.md) plus a `PROJECTS/INDEX.md` list, and personal preferences through SYNAPSE into `CEREBELLUM/`.
 - Keep area files short (under ~80 lines). The brain stays cheap because each task loads little.
 - Conventions for writing notes (links, no hard wraps) live in [MEMORY/MECHANICS.md](MEMORY/MECHANICS.md).
 

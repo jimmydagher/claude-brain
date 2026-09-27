@@ -5,8 +5,8 @@ python scripts/check_brain.py           whole vault
 python scripts/check_brain.py FILE...   only these files
 python scripts/check_brain.py --hook    Claude Code PostToolUse hook: checks the file just written
 
-Errors: dead wikilinks, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
-Warnings: slop-list hits (they mark a passage to test, not a verdict) and repeated long lines.
+Errors: dead wikilinks and heading links, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
+Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines and CEREBELLUM sections over the size cap.
 Exit: 0 no errors, 1 errors, 2 errors in --hook mode (Claude Code shows them to Claude).
 """
 import json
@@ -15,12 +15,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", "scripts"}
+SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts"}
 UNTAGGED_OK = {"README.md"}
 HIPPOCAMPUS = ("HIPPOCAMPUS/SYNAPSE.md", "HIPPOCAMPUS/ENGRAM.md")
 HEADING = re.compile(r"#{1,6}\s+(.*)")
 BLOCK = re.compile(r"\s*([#>|*+-]|\d+\.\s|<!--)")
-LINK = re.compile(r"\[\[([^\]|#\\]+)")
+LINK = re.compile(r"\[\[([^\]|#\\]+)(?:#([^\]|\\]+))?")
+SECTION_CAP = 150
 CODE_SPAN = re.compile(r"`[^`]*`")
 QUOTED = re.compile("\"[^\"]*\"|“[^”]*”")
 RESIDUE = re.compile(r"oaicite|contentReference\[|utm_source=chatgpt\.com|\[cite:\s*\d+\]|\[Your Name\]|lorem ipsum", re.I)
@@ -76,8 +77,17 @@ def slop_pattern():
 
 
 def build_index():
-    notes = [p.relative_to(ROOT).as_posix()[:-3].lower() for p in ROOT.rglob("*.md") if is_note(p)]
-    return set(notes), {n.rsplit("/", 1)[-1] for n in notes}
+    """Return note paths, a name-to-paths map and each note's lowercase headings (for #Heading links)."""
+    paths, names, heads = set(), {}, {}
+    for p in ROOT.rglob("*.md"):
+        if not is_note(p):
+            continue
+        key = p.relative_to(ROOT).as_posix()[:-3].lower()
+        paths.add(key)
+        names.setdefault(key.rsplit("/", 1)[-1], []).append(key)
+        found = (HEADING.match(line) for line in p.read_text(encoding="utf-8").splitlines())
+        heads[key] = {m.group(1).strip().lower() for m in found if m}
+    return paths, names, heads
 
 
 def check_note(path, slop, index, errors, warnings):
@@ -86,17 +96,20 @@ def check_note(path, slop, index, errors, warnings):
     front = frontmatter(lines)
     if name not in UNTAGGED_OK and not (front and any(line.startswith("tags:") for line in front)):
         errors.append(f"{name}:1: missing tags frontmatter")
-    paths, names = index
+    paths, names, heads = index
     prev_plain = False
     for n, text, section in body(lines):
         plain = bool(text.strip()) and not BLOCK.match(text)
         if plain and prev_plain:
             errors.append(f"{name}:{n}: hard wrap: join this line with the one above")
         prev_plain = plain
-        for target in LINK.findall(text):
+        for target, heading in LINK.findall(text):
             key = target.strip().lower().removesuffix(".md")
-            if key not in (paths if "/" in key else names):
+            found = ([key] if key in paths else []) if "/" in key else names.get(key, [])
+            if not found:
                 errors.append(f"{name}:{n}: dead link [[{target.strip()}]]")
+            elif heading and not heading.startswith("^") and not any(heading.strip().lower() in heads[f] for f in found):
+                errors.append(f"{name}:{n}: dead heading link [[{target.strip()}#{heading.strip()}]]")
         if "—" in text:
             errors.append(f"{name}:{n}: em dash")
         residue = RESIDUE.search(text)
@@ -140,6 +153,21 @@ def check_repeats(warnings):
             warnings.append(f"{places[0]}: line repeated in {', '.join(places[1:])}: give it one home")
 
 
+def check_cerebellum(warnings):
+    """Warn when a CEREBELLUM section outgrows the cap: it splits into its own file."""
+    for path in sorted((ROOT / "CEREBELLUM").glob("*.md")):
+        if path.name == "CEREBELLUM.md":
+            continue
+        title, count = None, 0
+        for line in path.read_text(encoding="utf-8").splitlines() + ["## "]:
+            if line.startswith("## "):
+                if title and count > SECTION_CAP:
+                    warnings.append(f"{rel(path)}: section '{title}' has {count} lines (cap {SECTION_CAP}): split it into its own file")
+                title, count = line[3:].strip(), 0
+            else:
+                count += 1
+
+
 def main():
     for stream in (sys.stdout, sys.stderr):
         stream.reconfigure(errors="replace")
@@ -163,6 +191,7 @@ def main():
         check_ids(errors)
     if not hook and not args:
         check_repeats(warnings)
+        check_cerebellum(warnings)
     out = sys.stderr if hook else sys.stdout
     for line in errors + warnings:
         print(line, file=out)
