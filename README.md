@@ -23,15 +23,15 @@ flowchart LR
 ```
 
 - **CORTEX.md** is the entry point: the always-on rules (led by 7 non-negotiable token-economy rules), the conflict order and the rules for updating the brain. It loads once per session.
-- **NEOCORTEX/** is long-term shared memory: one instruction file per area, grouped into four lobes by tag. Its index, [NEOCORTEX/NEOCORTEX.md](NEOCORTEX/NEOCORTEX.md), holds the routing rules and the routing table and loads with CORTEX. The AI opens only the file the task needs, so a typical task loads about 1,500–2,500 tokens of instructions.
-- **HIPPOCAMPUS/** is where new information waits before it becomes memory: SYNAPSE.md holds numbered proposals (HX0001, HX0002…), and ENGRAM.md keeps the trail of what was committed or rejected. Both are in-transit files that git doesn't track; [HIPPOCAMPUS/HIPPOCAMPUS.md](HIPPOCAMPUS/HIPPOCAMPUS.md) holds their templates, so a clone recreates them on first use.
-- **PREFRONTAL/** holds all your personal memory, kept apart from the shared rules in NEOCORTEX: preference topic files with one section per area, loaded section by section, and `PROJECTS/` with the project list and per-project hubs (goal, status, a short `## Now`, decisions, next actions). You own it; preferences arrive through SYNAPSE. Its guide, [PREFRONTAL/PREFRONTAL.md](PREFRONTAL/PREFRONTAL.md), has the scope ladder that decides where a lesson goes; your files link up to it.
+- **NEOCORTEX/** is long-term shared memory: one instruction file per area, grouped into four lobes by tag. Its index (NEOCORTEX/NEOCORTEX.md), holds the routing rules and the routing table and loads with CORTEX. The AI opens only the file the task needs, so a typical task loads about 1,500–2,500 tokens of instructions.
+- **HIPPOCAMPUS/** is where new information waits before it becomes memory: SYNAPSE.md holds numbered proposals (HX0001, HX0002…), and ENGRAM.md keeps the trail of what was committed or rejected. Both are in-transit files that git doesn't track; (HIPPOCAMPUS/HIPPOCAMPUS.md) holds their templates, so a clone recreates them on first use.
+- **PREFRONTAL/** holds all your personal memory, kept apart from the shared rules in NEOCORTEX: preference topic files with one section per area, loaded section by section, and `PROJECTS/` with the project list and per-project hubs (goal, status, a short `## Now`, decisions, next actions). You own it; preferences arrive through SYNAPSE. Its guide (PREFRONTAL/PREFRONTAL.md), has the scope ladder that decides where a lesson goes; your files link up to it.
 
 Links follow the same tree, so Obsidian's graph shows the brain's structure: CORTEX in the middle, the three region indexes around it, each region's files around its index. The one link across regions is ENGRAM → NEOCORTEX, where committed memory lands.
 
 Every area file has the same shape: tags, a scope line, Core Rules, Defaults, Avoid and Output. Corrections don't pile up as add-ons: committing one rewrites the rule it changes, so no two rules compete at read time.
 
-Areas: CODING, THINKING, WRITING, RESEARCH, PLANNING, REVIEW, KNOWLEDGE, LANGUAGE, ANALYTICS, VISUAL, ASSISTANT, AUTOPILOT, SECURITY, BUSINESS, LEARNING, PROMPTING, MECHANICS. The routing table in [NEOCORTEX/NEOCORTEX.md](NEOCORTEX/NEOCORTEX.md) says when each one loads.
+Areas: CODING, THINKING, WRITING, RESEARCH, PLANNING, REVIEW, KNOWLEDGE, LANGUAGE, ANALYTICS, VISUAL, ASSISTANT, AUTOPILOT, SECURITY, BUSINESS, LEARNING, PROMPTING, MECHANICS. The routing table in (NEOCORTEX/NEOCORTEX.md) says when each one loads.
 
 ## Token economy
 
@@ -111,9 +111,9 @@ Your harness needs to know where the vault lives. Pick one:
 ## Make it yours
 
 - CODING RULE#1 points to my own standards skill (`/sdsi:core`) and RULE#4 to the Graphify skill; swap in your own.
-- `.gitignore` keeps `.remember/` and all of `PREFRONTAL/` and `HIPPOCAMPUS/` except their guides out of the repo, so a clone starts with none of them. Create your own: projects from the template in [PREFRONTAL/PREFRONTAL.md](PREFRONTAL/PREFRONTAL.md) plus a `PREFRONTAL/PROJECTS/PROJECTS.md` list, and personal preferences through SYNAPSE into `PREFRONTAL/`.
+- `.gitignore` keeps `.remember/` and all of `PREFRONTAL/` and `HIPPOCAMPUS/` except their guides out of the repo, so a clone starts with none of them. Create your own: projects from the template in (PREFRONTAL/PREFRONTAL.md) plus a `PREFRONTAL/PROJECTS/PROJECTS.md` list, and personal preferences through SYNAPSE into `PREFRONTAL/`.
 - Keep area files short (under ~80 lines). The brain stays cheap because each task loads little.
-- Conventions for writing notes (links, no hard wraps) live in [NEOCORTEX/MECHANICS.md](NEOCORTEX/MECHANICS.md).
+- Conventions for writing notes (links, no hard wraps) live in (NEOCORTEX/MECHANICS.md).
 
 ## Sources
 
