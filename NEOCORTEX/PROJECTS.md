@@ -7,7 +7,7 @@ tags:
 The project list is `PROJECTS/INDEX.md`, a personal file that git doesn't track. Missing? The human has no projects yet: use the template below.
 
 ## Rules
-1. A project note overrides general area rules for that project (CORTEX rule 9).
+1. A project note overrides general area rules for that project ([[CORTEX#Conflicts|CORTEX › Conflicts]]).
 2. Changing state lives in the hub (status, decisions, next actions); stable how-to rules live in NEOCORTEX.
 3. Log decisions in the hub as `YYYY-MM-DD: decision (why)`, newest last.
 4. Code projects: `/sdsi:core` ([[NEOCORTEX/CODING|CODING]] RULE#1).

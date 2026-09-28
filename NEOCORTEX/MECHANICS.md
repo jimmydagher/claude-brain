@@ -7,20 +7,20 @@ tags:
 ## Core Rules (non-negotiable)
 
 ### RULE#1 On request, then cached for the session
-The brain is off until the human says "use the cortex" or "use your brain" (or runs `/cortex`). Then read `CORTEX.md` once, reply `Brain: on`, and apply it to every task for the rest of the session.
+The brain is off until the human says "use the cortex" or "use your brain" (or runs `/cortex`). Then read `CORTEX.md` and `THALAMUS.md` once, reply `Brain: on`, and apply it to every task for the rest of the session.
 
 ### RULE#2 Read once, reuse from context
 A brain file read this session stays in context, and later turns reuse it from the prompt cache. Open area files only when a task needs them, once each; never re-read to "refresh".
 
 ### RULE#3 Reload on purpose
-Re-read CORTEX and the area files in use when the human says "reload the brain", when you're told a brain file changed, or after the context was compacted (compaction summarizes files read by tools, so their exact rules are gone).
+Re-read CORTEX, THALAMUS and the area files in use when the human says "reload the brain", when you're told a brain file changed, or after the context was compacted (compaction summarizes files read by tools, so their exact rules are gone).
 
 ### RULE#4 No hard wraps in Markdown
 One paragraph or list item is one line, however long. Let the editor soft-wrap; never insert line breaks to fit a narrow window.
 
 ## Session
 - Order: CORTEX first, then area files as tasks need them (plus the CEREBELLUM sections `CEREBELLUM/MAP.md` lists for the area), then project notes (a hub's `## Now` first). SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
-- Per-task announcements follow CORTEX rule 3 (`Brain: CODING + SECURITY`); don't repeat `Brain: on`.
+- Per-task announcements follow [[THALAMUS#Routing Rules|THALAMUS › Routing Rules]] (rule 3) (`Brain: CODING + SECURITY`); don't repeat `Brain: on`.
 - Always-on setups import CORTEX in CLAUDE.md (`@path`), so it loads at session start, is prompt-cached and survives compaction. If CORTEX is already in context that way, skip the read in RULE#1.
 
 ## Markdown
@@ -51,5 +51,5 @@ On "check the brain", audit and report; change nothing during the audit (fixes g
 
 ## Avoid
 - Hard-wrapped paragraphs or bullets.
-- Markdown links (`[x](file.md)`) between vault notes; use wikilinks (CORTEX rule 8).
+- Markdown links (`[x](file.md)`) between vault notes; use wikilinks ([[THALAMUS#Routing Rules|THALAMUS › Routing Rules]], rule 8).
 - Bold lines standing in for headings; code blocks without a language.

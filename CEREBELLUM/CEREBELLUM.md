@@ -21,10 +21,10 @@ Store each fact at the narrowest level where it is still true:
 | One machine | Paths, shell, OS | CEREBELLUM, environment file |
 
 ### RULE#3 Fill gaps, never contradict
-A CEREBELLUM entry may fill a gap a standard leaves open or choose among options it allows. It overrides an area file's Defaults, never its Core Rules, a standard, the Token economy rules or the guardrails in CORTEX rule 14.
+A CEREBELLUM entry may fill a gap a standard leaves open or choose among options it allows. It overrides an area file's Defaults, never its Core Rules, a standard, the Token economy rules or the guardrails in [[CORTEX#Behavior|CORTEX › Behavior]] (rule 14).
 
 ### RULE#4 Load the linked section only
-Read the section `MAP.md` lists for the task's area, not the whole file. It doesn't count toward CORTEX's 3-file cap.
+Read the section `MAP.md` lists for the task's area, not the whole file. It doesn't count toward the 3-file cap in [[THALAMUS#Routing Rules|THALAMUS › Routing Rules]].
 
 ### RULE#5 Personal stays out of the shared files
 Everything in CEREBELLUM except this guide is untracked by git, so the public repo stays generic. No tracked file links to a personal file, names a personal topic or quotes a personal entry; only `MAP.md` points into CEREBELLUM.
