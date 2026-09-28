@@ -6,7 +6,7 @@ python scripts/check_brain.py FILE...   only these files
 python scripts/check_brain.py --hook    Claude Code PostToolUse hook: checks the file just written
 
 Errors: dead wikilinks and heading links, ambiguous bare-name links, tracked notes linking to personal notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
-Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, orphan notes and personal sections over the size cap.
+Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, links that leave the tree, orphan notes and personal sections over the size cap.
 Exit: 0 no errors, 1 errors, 2 errors in --hook mode (Claude Code shows them to Claude).
 """
 import json
@@ -18,9 +18,12 @@ ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts", "docs"}
 UNTAGGED_OK = {"README.md"}
 HIPPOCAMPUS = ("HIPPOCAMPUS/SYNAPSE.md", "HIPPOCAMPUS/ENGRAM.md")
-PERSONAL = ("limbic/", "prefrontal/")
-PERSONAL_GUIDES = {"limbic/limbic", "prefrontal/prefrontal"}
-ROOTS = {"cortex", "readme", "limbic/amygdala", "hippocampus/synapse", "hippocampus/engram"}
+PERSONAL = ("prefrontal/",)
+PERSONAL_GUIDES = {"prefrontal/prefrontal"}
+TOP = "cortex"  # the note every folder index hangs from
+ROOTS = {TOP, "readme"}
+# Links allowed to leave the tree on purpose: ENGRAM shows where committed memory lands.
+TREE_EXCEPTIONS = {("hippocampus/engram", "neocortex/neocortex")}
 HEADING = re.compile(r"#{1,6}\s+(.*)")
 BLOCK = re.compile(r"\s*([#>|*+-]|\d+\.\s|<!--)")
 LINK = re.compile(r"\[\[([^\]|#\\]+)(?:#([^\]|\\]+))?")
@@ -43,6 +46,25 @@ def rel(path):
 def is_personal(key):
     """Whether a lowercase vault key (path without .md) is an untracked personal note."""
     return key.startswith(PERSONAL) and key not in PERSONAL_GUIDES
+
+
+def parent(key, paths):
+    """The note a note hangs from: its folder's index (the note named like the folder), up to CORTEX."""
+    folders = key.split("/")[:-1]
+    if folders and key.rsplit("/", 1)[-1] == folders[-1]:
+        folders = folders[:-1]  # a folder's own index hangs from the folder above
+    while folders:
+        index = "/".join([*folders, folders[-1]])
+        if index in paths:
+            return index
+        folders = folders[:-1]
+    return None if key == TOP else TOP
+
+
+def in_tree(source, target, paths):
+    """Whether a link follows the tree: to the note's index, a note it indexes, or a neighbour inside a region."""
+    up, down = parent(source, paths), parent(target, paths)
+    return target == up or source == down or (up == down and up != TOP) or (source, target) in TREE_EXCEPTIONS
 
 
 def frontmatter(lines):
@@ -122,8 +144,12 @@ def check_note(path, slop, index, errors, warnings, linked):
             if "/" not in key and len(found) > 1:
                 errors.append(f"{name}:{n}: ambiguous link [[{target.strip()}]] matches {', '.join(sorted(found))}: use the full path")
             if tracked and any(is_personal(f) for f in found):
-                errors.append(f"{name}:{n}: tracked note links to personal note [[{target.strip()}]]: only AMYGDALA points into PREFRONTAL")
-            linked.update(f for f in found if f != own)
+                errors.append(f"{name}:{n}: tracked note links to personal note [[{target.strip()}]]: personal notes link up to PREFRONTAL instead")
+            if len(found) == 1 and found[0] != own and not in_tree(own, found[0], paths):
+                warnings.append(f"{name}:{n}: link [[{target.strip()}]] leaves the tree: write it as a plain name in backticks")
+            others = [f for f in found if f != own]
+            if others:
+                linked.update([own, *others])  # a graph edge: neither end is an orphan
             if heading and not heading.startswith("^") and not any(heading.strip().lower() in heads[f] for f in found):
                 errors.append(f"{name}:{n}: dead heading link [[{target.strip()}#{heading.strip()}]]")
         if "—" in text:
@@ -170,11 +196,11 @@ def check_repeats(warnings):
 
 
 def check_orphans(files, linked, warnings):
-    """Warn about notes no other note links to (roots excepted)."""
+    """Warn about notes with no link in or out, as Obsidian's graph counts orphans (roots excepted)."""
     for path in files:
         key = rel(path)[:-3].lower()
         if key not in linked and key not in ROOTS:
-            warnings.append(f"{rel(path)}: orphan: no note links here")
+            warnings.append(f"{rel(path)}: orphan: no link in or out")
 
 
 def check_prefrontal(warnings):

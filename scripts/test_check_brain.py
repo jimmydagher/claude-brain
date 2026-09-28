@@ -24,8 +24,8 @@ class CheckBrainTest(unittest.TestCase):
         self.root = Path(tmp.name).resolve()
         self.addCleanup(setattr, check_brain, "ROOT", check_brain.ROOT)
         check_brain.ROOT = self.root
-        note(self.root, "CORTEX.md", "Router: [[THALAMUS|THALAMUS]]")
-        note(self.root, "THALAMUS.md", "Back: [[CORTEX|CORTEX]]")
+        note(self.root, "CORTEX.md", "Areas: [[NEOCORTEX/NEOCORTEX|NEOCORTEX]]")
+        note(self.root, "NEOCORTEX/NEOCORTEX.md", "Up: [[CORTEX|CORTEX]]")
 
     def run_checks(self):
         out = io.StringIO()
@@ -41,7 +41,7 @@ class CheckBrainTest(unittest.TestCase):
     def test_ambiguous_bare_link_is_an_error(self):
         note(self.root, "NEOCORTEX/BUSINESS.md", "Shared.")
         note(self.root, "PREFRONTAL/PROJECTS/Acme/BUSINESS.md", "Acme.", tag="project/acme")
-        note(self.root, "THALAMUS.md", "Back: [[CORTEX|CORTEX]] and [[BUSINESS]]")
+        note(self.root, "NEOCORTEX/NEOCORTEX.md", "Up: [[CORTEX|CORTEX]] and [[BUSINESS]]")
         code, out = self.run_checks()
         self.assertEqual(code, 1)
         self.assertIn("ambiguous link [[BUSINESS]]", out)
@@ -49,33 +49,50 @@ class CheckBrainTest(unittest.TestCase):
     def test_full_path_link_is_not_ambiguous(self):
         note(self.root, "NEOCORTEX/BUSINESS.md", "Shared.")
         note(self.root, "PREFRONTAL/PROJECTS/Acme/BUSINESS.md", "Acme.", tag="project/acme")
-        note(self.root, "THALAMUS.md", "Back: [[CORTEX|CORTEX]] and [[NEOCORTEX/BUSINESS|BUSINESS]]")
+        note(self.root, "NEOCORTEX/NEOCORTEX.md", "Up: [[CORTEX|CORTEX]] and [[NEOCORTEX/BUSINESS|BUSINESS]]")
         code, out = self.run_checks()
         self.assertNotIn("ambiguous", out)
 
     def test_tracked_note_linking_personal_note_is_an_error(self):
         note(self.root, "PREFRONTAL/STYLE.md", "## CODING\n- Plain logs.", tag="memory/personal")
-        note(self.root, "THALAMUS.md", "Back: [[CORTEX|CORTEX]] and [[PREFRONTAL/STYLE#CODING|STYLE]]")
+        note(self.root, "PREFRONTAL/PREFRONTAL.md", "Up: [[CORTEX|CORTEX]] and [[PREFRONTAL/STYLE#CODING|STYLE]]", tag="memory/personal")
         code, out = self.run_checks()
         self.assertEqual(code, 1)
         self.assertIn("tracked note links to personal note [[PREFRONTAL/STYLE]]", out)
 
-    def test_personal_notes_link_freely_and_guides_count_as_tracked(self):
-        note(self.root, "PREFRONTAL/STYLE.md", "## CODING\n- Plain logs.", tag="memory/personal")
-        note(self.root, "PREFRONTAL/PREFRONTAL.md", "Guide.", tag="memory/personal")
-        note(self.root, "LIMBIC/AMYGDALA.md", "## CODING\n- [[PREFRONTAL/STYLE#CODING|STYLE › CODING]]", tag="memory/personal")
-        note(self.root, "THALAMUS.md", "Back: [[CORTEX|CORTEX]] and [[PREFRONTAL/PREFRONTAL|PREFRONTAL]]")
+    def test_personal_notes_link_up_to_the_guide(self):
+        note(self.root, "CORTEX.md", "[[NEOCORTEX/NEOCORTEX|NEOCORTEX]] and [[PREFRONTAL/PREFRONTAL|PREFRONTAL]]")
+        note(self.root, "PREFRONTAL/PREFRONTAL.md", "Up: [[CORTEX|CORTEX]]", tag="memory/personal")
+        note(self.root, "PREFRONTAL/STYLE.md", "> Up: [[PREFRONTAL/PREFRONTAL|PREFRONTAL]]\n\n## CODING\n- Plain logs.", tag="memory/personal")
+        note(self.root, "PREFRONTAL/PROJECTS/PROJECTS.md", "> Up: [[PREFRONTAL/PREFRONTAL|PREFRONTAL]]", tag="project")
         code, out = self.run_checks()
         self.assertEqual(code, 0, out)
+        self.assertIn("0 errors, 0 warnings", out)  # a note that only links up isn't an orphan
 
     def test_orphan_note_warns_but_roots_do_not(self):
         note(self.root, "NEOCORTEX/LONELY.md", "Links to itself: [[NEOCORTEX/LONELY|LONELY]]")
-        note(self.root, "LIMBIC/AMYGDALA.md", "Router.", tag="memory/personal")
         code, out = self.run_checks()
         self.assertEqual(code, 0, out)
-        self.assertIn("NEOCORTEX/LONELY.md: orphan: no note links here", out)
+        self.assertIn("NEOCORTEX/LONELY.md: orphan: no link in or out", out)
         self.assertNotIn("CORTEX.md: orphan", out)
-        self.assertNotIn("AMYGDALA.md: orphan", out)
+
+    def test_link_that_leaves_the_tree_warns(self):
+        note(self.root, "CORTEX.md", "[[NEOCORTEX/NEOCORTEX|NEOCORTEX]], [[HIPPOCAMPUS/HIPPOCAMPUS|HIPPOCAMPUS]], "
+             "[[PREFRONTAL/PREFRONTAL|PREFRONTAL]] and a shortcut to [[NEOCORTEX/CODING|CODING]]")
+        note(self.root, "NEOCORTEX/NEOCORTEX.md", "Up: [[CORTEX|CORTEX]]; areas: [[NEOCORTEX/CODING\\|CODING]], "
+             "[[NEOCORTEX/WRITING\\|WRITING]]; next door: [[PREFRONTAL/PREFRONTAL|PREFRONTAL]]")
+        note(self.root, "NEOCORTEX/CODING.md", "Pairs with [[NEOCORTEX/WRITING|WRITING]] and [[PREFRONTAL/PREFRONTAL|PREFRONTAL]]")
+        note(self.root, "NEOCORTEX/WRITING.md", "Index: [[NEOCORTEX/NEOCORTEX#Areas|NEOCORTEX › Areas]]")
+        note(self.root, "HIPPOCAMPUS/HIPPOCAMPUS.md", "Up: [[CORTEX|CORTEX]]; [[HIPPOCAMPUS/ENGRAM|ENGRAM]]", tag="hippocampus")
+        note(self.root, "HIPPOCAMPUS/ENGRAM.md", "Lands in [[NEOCORTEX/NEOCORTEX|NEOCORTEX]]", tag="hippocampus")
+        note(self.root, "PREFRONTAL/PREFRONTAL.md", "Up: [[CORTEX|CORTEX]]", tag="memory/personal")
+        code, out = self.run_checks()
+        self.assertEqual(code, 1, out)  # only the dead #Areas heading is an error
+        leaves = [line for line in out.splitlines() if "leaves the tree" in line]
+        self.assertEqual(len(leaves), 3, out)
+        self.assertTrue(any(line.startswith("CORTEX.md:") and "[[NEOCORTEX/CODING]]" in line for line in leaves), out)
+        self.assertTrue(any(line.startswith("NEOCORTEX/NEOCORTEX.md:") for line in leaves), out)  # region to region
+        self.assertTrue(any(line.startswith("NEOCORTEX/CODING.md:") and "PREFRONTAL" in line for line in leaves), out)
 
     def test_docs_folder_is_skipped(self):
         (self.root / "docs").mkdir()

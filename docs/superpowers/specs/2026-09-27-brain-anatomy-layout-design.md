@@ -4,7 +4,7 @@ tags:
 ---
 # Brain anatomy layout: design
 
-Status: draft for review · Date: 2026-09-27 · Repos: `claude-brain` (vault), `cortex` (MCP server)
+Status: implemented 2026-09-27, revised 2026-09-28 (see Revision at the end: THALAMUS, LIMBIC and AMYGDALA were folded into the region indexes) · Date: 2026-09-27 · Repos: `claude-brain` (vault), `cortex` (MCP server)
 
 ## Goal
 
@@ -209,3 +209,47 @@ Between step 2 and step 6 the deployed server still looks for `CEREBELLUM/MAP.md
 | Numbered rule references silently wrong | Replaced by heading links the checker verifies |
 | Obsidian rewrites links during an external move | Obsidian closed during moves |
 | Name collisions on bare links (`BUSINESS` in NEOCORTEX and a project) | New ambiguous-link error; project links use full paths |
+
+## Revision 2026-09-28: links follow the tree
+
+After the first rollout, Obsidian's graph drew THALAMUS as the center of the brain (it linked all 18 NEOCORTEX notes) and NEOCORTEX's own guide at the edge. The graph mixed two views: how notes are grouped (folders, lobes) and what mentions what. The revision makes the links follow the folder tree, so the graph shows the grouping; other references stay as plain names.
+
+| # | Decision | Replaces |
+| --- | --- | --- |
+| R1 | The root holds only `CORTEX.md` and `README.md`. CORTEX links down to the three region indexes: NEOCORTEX, HIPPOCAMPUS, PREFRONTAL | D2 |
+| R2 | `NEOCORTEX/NEOCORTEX.md` is the area index: routing rules, the routing table by lobe, what a lobe is, the area-file shape. `THALAMUS.md` is removed | D2, D6 |
+| R3 | `LIMBIC/` and AMYGDALA are removed. `PREFRONTAL/PREFRONTAL.md` holds the ownership rules, the scope ladder, the preference and project rules and the hub template | D8 |
+| R4 | `PREFRONTAL.md` stays tracked and generic. Personal files link up to it, never the reverse. The per-area index is the `## <AREA>` headings in PREFRONTAL files (`## Always` loads every session); `cortex_load` lists them by area | D8, D9, D11 (no AMYGDALA rows to keep in sync) |
+| R5 | Links follow the tree: a note links to its folder's index, the notes it indexes, or neighbours inside its region. Any other reference is a plain name in backticks (`SECURITY`). `check_brain.py` warns on links that leave the tree | D5 (the `Pairs with` links inside NEOCORTEX stay) |
+| R6 | ENGRAM links NEOCORTEX, the one deliberate cross-region line, to show where committed memory lands. SYNAPSE and ENGRAM link up to the HIPPOCAMPUS guide | none |
+| R7 | An orphan is a note with no link in or out, as Obsidian's graph counts it | Link integrity |
+
+### Revised layout
+
+```text
+CORTEX.md                  entrypoint; links to the three region indexes             tracked, protected
+README.md
+NEOCORTEX/                 long-term shared memory                                    tracked, protected
+  NEOCORTEX.md             area index: routing rules and table by lobe, lobes, shape
+  CODING.md … WRITING.md   17 area files
+HIPPOCAMPUS/               intake
+  HIPPOCAMPUS.md           guide + templates                                          tracked, protected
+  SYNAPSE.md, ENGRAM.md    in transit; link up to the guide, ENGRAM also to NEOCORTEX untracked, server-managed
+PREFRONTAL/                working memory                                             protected
+  PREFRONTAL.md            guide: rules, scope ladder, preferences, projects, hub template   tracked
+  ENVIRONMENT.md, STYLE.md …  preference topic files, each linking up to the guide    untracked
+  PROJECTS/PROJECTS.md     project list: links up to the guide, down to each hub      untracked, writable
+  PROJECTS/<Name>/…        hubs and sub-notes                                         untracked, writable
+```
+
+### Load sequence (revised)
+
+1. "use the cortex": `cortex_load` returns CORTEX, the NEOCORTEX index, the `## Always` sections of PREFRONTAL files, and the PREFRONTAL sections listed by area.
+2. Per task: the NEOCORTEX index picks the area file(s), at most 3, plus each PREFRONTAL `## <AREA>` section for that area.
+3. Named project: `PREFRONTAL/PROJECTS/PROJECTS.md`, then the hub's `## Now`.
+
+### Cortex server (0.3.0, revised)
+
+- `layout`: `router: NEOCORTEX/NEOCORTEX.md`, `memory: NEOCORTEX/`, `personal: PREFRONTAL/`, `projects: PREFRONTAL/PROJECTS/`. The `limbic` and `personal_map` keys are gone.
+- Default protected list: `CORTEX.md`, `NEOCORTEX/`, `PREFRONTAL/`, `HIPPOCAMPUS/HIPPOCAMPUS.md`, `!PREFRONTAL/PROJECTS/`. The router is covered by `NEOCORTEX/`; the audit warns when the memory or personal folder, or the router, isn't protected.
+- `cortex_load` builds the personal index from the headings of the top-level PREFRONTAL files (the guide excepted) instead of reading AMYGDALA.

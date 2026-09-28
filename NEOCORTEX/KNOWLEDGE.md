@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: summarizing, extracting and filing notes in this vault · Pairs with: [[NEOCORTEX/RESEARCH|RESEARCH]], [[PREFRONTAL/PREFRONTAL|PREFRONTAL]], [[NEOCORTEX/PROMPTING|PROMPTING]] (writing brain rules), [[NEOCORTEX/MECHANICS|MECHANICS]] (Markdown format)
+> Scope: summarizing, extracting and filing notes in this vault · Pairs with: [[NEOCORTEX/RESEARCH|RESEARCH]], `PREFRONTAL`, [[NEOCORTEX/PROMPTING|PROMPTING]] (writing brain rules), [[NEOCORTEX/MECHANICS|MECHANICS]] (Markdown format)
 
 ## Core Rules (non-negotiable)
 

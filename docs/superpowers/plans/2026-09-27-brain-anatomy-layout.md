@@ -4,6 +4,8 @@ tags:
 ---
 # Brain Anatomy Layout Implementation Plan
 
+> **Status:** Tasks 0-8 executed 2026-09-27. The layout was then revised on 2026-09-28 (THALAMUS into `NEOCORTEX/NEOCORTEX.md`, LIMBIC and AMYGDALA into `PREFRONTAL/PREFRONTAL.md`, links follow the tree); see the spec's Revision section. Paths below describe the first rollout.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Reorganize the claude-brain vault into CORTEX (entry) + THALAMUS (router) + NEOCORTEX (shared memory, lobes as tags) + HIPPOCAMPUS (intake) + LIMBIC (personal router AMYGDALA) + PREFRONTAL (all personal memory and projects), and ship a matching Cortex MCP server release.
