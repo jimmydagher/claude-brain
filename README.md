@@ -1,6 +1,6 @@
 ---
 tags:
-  - memory/core
+  - information
 ---
 # claude-brain
 
@@ -22,7 +22,7 @@ flowchart LR
     G -->|lands in| N
 ```
 
-- **CORTEX.md** is the entry point: the always-on rules (led by 7 non-negotiable token-economy rules), the conflict order and the rules for updating the brain. It loads once per session.
+- **CORTEX.md** [CORTEX](CORTEX.md) is the entry point: the always-on rules (led by 7 non-negotiable token-economy rules), the conflict order and the rules for updating the brain. It loads once per session.
 - **NEOCORTEX/** is long-term shared memory: one instruction file per area, grouped into four lobes by tag. Its index (NEOCORTEX/NEOCORTEX.md), holds the routing rules and the routing table and loads with CORTEX. The AI opens only the file the task needs, so a typical task loads about 1,500–2,500 tokens of instructions.
 - **HIPPOCAMPUS/** is where new information waits before it becomes memory: SYNAPSE.md holds numbered proposals (HX0001, HX0002…), and ENGRAM.md keeps the trail of what was committed or rejected. Both are in-transit files that git doesn't track; (HIPPOCAMPUS/HIPPOCAMPUS.md) holds their templates, so a clone recreates them on first use.
 - **PREFRONTAL/** holds all your personal memory, kept apart from the shared rules in NEOCORTEX: preference topic files with one section per area, loaded section by section, and `PROJECTS/` with the project list and per-project hubs (goal, status, a short `## Now`, decisions, next actions). You own it; preferences arrive through SYNAPSE. Its guide (PREFRONTAL/PREFRONTAL.md), has the scope ladder that decides where a lesson goes; your files link up to it.

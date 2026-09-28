@@ -1,6 +1,6 @@
 ---
 tags:
-  - memory/personal
+  - persona
 ---
 > Scope: working memory: the human's own preferences and active projects, who owns them and where a lesson goes · Up: [[CORTEX|CORTEX]] · Process: [[CORTEX#Brain Upkeep|CORTEX › Brain Upkeep]]
 

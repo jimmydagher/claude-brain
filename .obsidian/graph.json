@@ -43,7 +43,7 @@
       }
     },
     {
-      "query": "tag:#project",
+      "query": "tag:#persona",
       "color": {
         "a": 1,
         "rgb": 11547546
