@@ -32,6 +32,7 @@ Never weaken, skip or delete tests, hard-code expected values, swallow errors or
 - New test? Prove it catches the bug: break the code, watch the test fail, restore.
 - Delete what your change replaces and any temp files you made. Flag unrelated dead code; don't remove it.
 - Search (graph, grep, symbols) before opening files; read only the ranges you need.
+- Log files are traditional plain text: one line per event (timestamp, level, message), rotated by size. Never JSON or JSONL log files; this sets the file format SDSI's logging standard leaves open. Keep them in a dedicated `logs/` folder, never inside config or data folders.
 
 ## Avoid
 - "Should work now" without a fresh run.
