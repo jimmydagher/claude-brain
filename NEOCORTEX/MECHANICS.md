@@ -19,7 +19,7 @@ Re-read CORTEX, THALAMUS and the area files in use when the human says "reload t
 One paragraph or list item is one line, however long. Let the editor soft-wrap; never insert line breaks to fit a narrow window.
 
 ## Session
-- Order: CORTEX first, then area files as tasks need them (plus the PREFRONTAL sections `LIMBIC/AMYGDALA.md` lists for the area), then project notes (a hub's `## Now` first). SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
+- Order: CORTEX, THALAMUS and AMYGDALA first (one `cortex_load`), then area files as tasks need them plus the PREFRONTAL sections AMYGDALA lists for the area, then project notes (a hub's `## Now` first). SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
 - Per-task announcements follow [[THALAMUS#Routing Rules|THALAMUS › Routing Rules]] (rule 3) (`Brain: CODING + SECURITY`); don't repeat `Brain: on`.
 - Always-on setups import CORTEX in CLAUDE.md (`@path`), so it loads at session start, is prompt-cached and survives compaction. If CORTEX is already in context that way, skip the read in RULE#1.
 
@@ -38,11 +38,11 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 
 ## Tags
 - Every brain note starts with a `tags` property (YAML list); the graph colors come from it (`.obsidian/graph.json`).
-- Families: `memory/core` (the brain itself), `memory/technical` (build, operate, secure, data), `memory/thinking` (reason, plan, research, review, learn, file knowledge), `memory/communication` (write, translate, design, sell, converse).
-- Project notes: `project/<name>` (lowercase, hyphens); the PROJECTS index: `project`.
+- Lobes, their tags and what each covers: [[NEOCORTEX/NEOCORTEX#Lobes|NEOCORTEX › Lobes]]. CORTEX, THALAMUS and the NEOCORTEX guide take `memory/core`.
+- Project notes: `project/<name>` (lowercase, hyphens); the project list: `project`.
 - HIPPOCAMPUS notes: `hippocampus`, left uncolored in the graph because they aren't memory yet.
-- PREFRONTAL notes: `memory/personal`, also left uncolored: it is a separate personal layer, and a sixth color can't be told apart from the other five.
-- New areas join an existing family: a sixth graph color can't be told apart from the other five in both themes.
+- LIMBIC and PREFRONTAL notes other than projects: `memory/personal`, also left uncolored: a separate personal layer.
+- A sixth graph color can't be told apart from the other five in both themes, so new areas join an existing lobe.
 
 ## Check the brain
 On "check the brain", audit and report; change nothing during the audit (fixes go through SYNAPSE).

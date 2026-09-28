@@ -10,23 +10,27 @@ A second brain for AI harnesses: an Obsidian vault of short Markdown instruction
 
 ```mermaid
 flowchart LR
-    A["You: use your brain"] --> B["CORTEX.md: routing table + always-on rules"]
-    B -->|code task| C["NEOCORTEX/CODING.md"]
-    B -->|email| D["NEOCORTEX/WRITING.md"]
-    B -->|named project| E["PREFRONTAL/PROJECTS/…"]
+    A["You: use your brain"] --> B["CORTEX.md: always-on rules"]
+    B --> T["THALAMUS.md: routing table by lobe"]
+    T -->|code task| C["NEOCORTEX/CODING.md"]
+    T -->|email| D["NEOCORTEX/WRITING.md"]
+    B --> L["LIMBIC/AMYGDALA.md: your personal router"]
+    L -->|named project| E["PREFRONTAL/PROJECTS/…"]
+    L -->|preferences| P["PREFRONTAL/STYLE.md#CODING…"]
     B -->|new lesson| S["HIPPOCAMPUS/SYNAPSE.md: waits for approval"]
     S -->|commit to memory HX0001| C
 ```
 
-- **CORTEX.md** is the entry point: a routing table, the always-on rules (led by 7 non-negotiable token-economy rules) and the rules for updating the brain. It loads once per session.
-- **NEOCORTEX/** has one instruction file per area. The AI opens only the file the task needs, so a typical task loads about 1,500–2,500 tokens of instructions.
-- **PREFRONTAL/PROJECTS/** holds per-project context: goal, status, a short `## Now`, decisions, next actions.
-- **PREFRONTAL/** is your own layer: personal preferences, environment facts, style and mindset, kept apart from the shared rules in NEOCORTEX. You own it; entries arrive through SYNAPSE, and `LIMBIC/AMYGDALA.md` says which sections each area loads. The scope ladder and routing tests are in [LIMBIC/LIMBIC.md](LIMBIC/LIMBIC.md).
+- **CORTEX.md** is the entry point: the always-on rules (led by 7 non-negotiable token-economy rules), the conflict order and the rules for updating the brain. It loads once per session.
+- **THALAMUS.md** is the router: the routing rules and the routing table, grouped by lobe. It loads with CORTEX.
+- **NEOCORTEX/** has one instruction file per area, grouped into four lobes by tag; [NEOCORTEX/NEOCORTEX.md](NEOCORTEX/NEOCORTEX.md) explains them. The AI opens only the file the task needs, so a typical task loads about 1,500–2,500 tokens of instructions.
 - **HIPPOCAMPUS/** is where new information waits before it becomes memory: SYNAPSE.md holds numbered proposals (HX0001, HX0002…), and ENGRAM.md keeps the trail of what was committed or rejected. Both are in-transit files that git doesn't track; [HIPPOCAMPUS/HIPPOCAMPUS.md](HIPPOCAMPUS/HIPPOCAMPUS.md) holds their templates, so a clone recreates them on first use.
+- **LIMBIC/** holds your personal router, AMYGDALA, which says which of your sections each area loads, plus the guide with the scope ladder and routing tests: [LIMBIC/LIMBIC.md](LIMBIC/LIMBIC.md).
+- **PREFRONTAL/** holds all your personal memory, kept apart from the shared rules in NEOCORTEX: preference topic files, loaded section by section, and `PROJECTS/` with the project list and per-project hubs (goal, status, a short `## Now`, decisions, next actions). You own it; preferences arrive through SYNAPSE. Guide: [PREFRONTAL/PREFRONTAL.md](PREFRONTAL/PREFRONTAL.md).
 
 Every area file has the same shape: tags, a scope line, Core Rules, Defaults, Avoid and Output. Corrections don't pile up as add-ons: committing one rewrites the rule it changes, so no two rules compete at read time.
 
-Areas: CODING, THINKING, WRITING, RESEARCH, PLANNING, REVIEW, KNOWLEDGE, LANGUAGE, ANALYTICS, VISUAL, ASSISTANT, AUTOPILOT, SECURITY, BUSINESS, LEARNING, PROMPTING, MECHANICS, plus the PROJECTS index. The routing table in [CORTEX.md](CORTEX.md) says when each one loads.
+Areas: CODING, THINKING, WRITING, RESEARCH, PLANNING, REVIEW, KNOWLEDGE, LANGUAGE, ANALYTICS, VISUAL, ASSISTANT, AUTOPILOT, SECURITY, BUSINESS, LEARNING, PROMPTING, MECHANICS. The routing table in [THALAMUS.md](THALAMUS.md) says when each one loads.
 
 ## Token economy
 
@@ -56,15 +60,15 @@ Every note carries one tag, and `.obsidian/graph.json` colors the graph by tag:
 
 | Tag | Notes | Color |
 | --- | --- | --- |
-| `memory/core` | CORTEX, MECHANICS, PROMPTING | blue `#2a78d6` |
+| `memory/core` | CORTEX, THALAMUS, the NEOCORTEX guide, MECHANICS, PROMPTING | blue `#2a78d6` |
 | `memory/technical` | CODING, AUTOPILOT, SECURITY, ANALYTICS | green `#008300` |
 | `memory/thinking` | THINKING, PLANNING, RESEARCH, REVIEW, KNOWLEDGE, LEARNING | aqua `#1baf7a` |
 | `memory/communication` | WRITING, LANGUAGE, VISUAL, BUSINESS, ASSISTANT | gold `#c98500` |
-| `project`, `project/<name>` | the PROJECTS index and every project note | red `#e34948` |
+| `project`, `project/<name>` | the project list and every project note | red `#e34948` |
 | `hippocampus` | SYNAPSE, ENGRAM | uncolored: not memory yet |
-| `memory/personal` | everything in PREFRONTAL | uncolored: a personal layer |
+| `memory/personal` | everything in LIMBIC and PREFRONTAL except projects | uncolored: a personal layer |
 
-The five colors were checked against Obsidian's light and dark backgrounds and for color-blind vision. A sixth color would clash with one of them, so new areas join an existing family.
+The five colors were checked against Obsidian's light and dark backgrounds and for color-blind vision. A sixth color would clash with one of them, so new areas join an existing lobe.
 
 Obsidian keeps graph settings in memory and writes them back to `graph.json` whenever the graph changes. After editing that file outside Obsidian, run **Reload app without saving** from the command palette before opening the graph, or the in-memory copy can overwrite your edit.
 
@@ -98,12 +102,12 @@ Your harness needs to know where the vault lives. Pick one:
 
 ## Checks
 
-`scripts/check_brain.py` (Python, standard library only) runs the deterministic checks: dead links, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs, plus slop-list hits and repeated lines as warnings. `.claude/settings.json` runs it after every file Claude Code writes in this vault; delete that file to turn the hook off.
+`scripts/check_brain.py` (Python, standard library only) runs the deterministic checks: dead links, ambiguous bare-name links, tracked notes linking to personal notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs, plus slop-list hits, repeated lines and orphan notes as warnings. `.claude/settings.json` runs it after every file Claude Code writes in this vault; delete that file to turn the hook off. The checker's own tests run with `python -m unittest discover -s scripts -p "test_*.py"`.
 
 ## Make it yours
 
 - CODING RULE#1 points to my own standards skill (`/sdsi:core`) and RULE#4 to the Graphify skill; swap in your own.
-- `.gitignore` keeps `PREFRONTAL/PROJECTS/`, `.remember/`, and all of `PREFRONTAL/` and `HIPPOCAMPUS/` except their guides out of the repo, so a clone starts with none of them. Create your own: projects from the template in [PREFRONTAL/PREFRONTAL.md](PREFRONTAL/PREFRONTAL.md) plus a `PREFRONTAL/PROJECTS/PROJECTS.md` list, and personal preferences through SYNAPSE into `PREFRONTAL/`.
+- `.gitignore` keeps `.remember/` and all of `LIMBIC/`, `PREFRONTAL/` and `HIPPOCAMPUS/` except their guides out of the repo, so a clone starts with none of them. Create your own: projects from the template in [PREFRONTAL/PREFRONTAL.md](PREFRONTAL/PREFRONTAL.md) plus a `PREFRONTAL/PROJECTS/PROJECTS.md` list, and personal preferences through SYNAPSE into `PREFRONTAL/`.
 - Keep area files short (under ~80 lines). The brain stays cheap because each task loads little.
 - Conventions for writing notes (links, no hard wraps) live in [NEOCORTEX/MECHANICS.md](NEOCORTEX/MECHANICS.md).
 

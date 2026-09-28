@@ -19,24 +19,43 @@ The **router**: it tells you where to go, not what to know. The linked files tel
 8. When creating knowledge, add appropriate `[[wikilinks]]`.
 
 ## Routing Table
+Areas live in [[NEOCORTEX/NEOCORTEX|NEOCORTEX]], grouped into lobes; a lobe is a tag family, not a folder.
 
-|     | Task (Memory)              | Load when the task is about…                               | Go To                           |
-| --- | -------------------------- | ---------------------------------------------------------- | ------------------------------- |
-| 💻  | Code \| technical          | writing, fixing, debugging or refactoring code and scripts | [[NEOCORTEX/CODING\|CODING]]       |
-| 🧠  | Thinking \| decisions      | choosing between options, trade-offs, "should I…"          | [[NEOCORTEX/THINKING\|THINKING]]   |
-| ✍️  | Writing \| communication   | emails, docs, posts, messages, editing prose               | [[NEOCORTEX/WRITING\|WRITING]]     |
-| 🔎  | Research \| investigation  | finding, verifying or comparing information and sources    | [[NEOCORTEX/RESEARCH\|RESEARCH]]   |
-| 📋  | Planning \| projects       | turning goals into briefs, specs, roadmaps, task lists     | [[NEOCORTEX/PLANNING\|PLANNING]]   |
-| 🔄  | Review \| reflection       | critiquing a draft, plan or code; retros; feedback         | [[NEOCORTEX/REVIEW\|REVIEW]]       |
-| 📚  | Knowledge \| summarization | summarizing, extracting, filing notes in this vault        | [[NEOCORTEX/KNOWLEDGE\|KNOWLEDGE]] |
-| 🌐  | Translation \| language    | translating, localizing, proofreading                      | [[NEOCORTEX/LANGUAGE\|LANGUAGE]]   |
-| 📊  | Data \| analysis           | datasets, SQL, metrics, statistics, spreadsheets           | [[NEOCORTEX/ANALYTICS\|ANALYTICS]] |
-| 🖼️ | Images \| visual           | image prompts, diagrams, UI/web design, slides, video      | [[NEOCORTEX/VISUAL\|VISUAL]]       |
-| 💬  | Conversation \| assistant  | general questions and advice; anything unmatched           | [[NEOCORTEX/ASSISTANT\|ASSISTANT]] |
-| 🤖  | Agents \| tools \| MCP     | multi-step autonomous work, tool use, subagents, MCP       | [[NEOCORTEX/AUTOPILOT\|AUTOPILOT]] |
-| 🛡️ | Security \| safety         | secrets, permissions, destructive actions, untrusted input | [[NEOCORTEX/SECURITY\|SECURITY]]   |
-| 💼  | Business \| marketing      | strategy, marketing copy, sales outreach, product specs    | [[NEOCORTEX/BUSINESS\|BUSINESS]]   |
-| 🎓  | Learning \| teaching       | "teach me", tutoring, quizzes, study plans                 | [[NEOCORTEX/LEARNING\|LEARNING]]   |
-| 🧩  | Prompts \| skills          | prompts, skills, agents, CLAUDE.md, rules for this brain   | [[NEOCORTEX/PROMPTING\|PROMPTING]] |
-| 🔧  | Mechanics \| Markdown      | writing any .md file; how the brain loads, caches, reloads | [[NEOCORTEX/MECHANICS\|MECHANICS]] |
-| 📈  | Projects                   | anything tied to a named project                           | [[PREFRONTAL/PREFRONTAL\|PREFRONTAL]]   |
+### Core lobe
+|     | Task (Memory)         | Load when the task is about…                               | Go To                              |
+| --- | --------------------- | ---------------------------------------------------------- | ---------------------------------- |
+| 🧩  | Prompts \| skills     | prompts, skills, agents, CLAUDE.md, rules for this brain   | [[NEOCORTEX/PROMPTING\|PROMPTING]] |
+| 🔧  | Mechanics \| Markdown | writing any .md file; how the brain loads, caches, reloads | [[NEOCORTEX/MECHANICS\|MECHANICS]] |
+
+### Technical lobe
+|     | Task (Memory)          | Load when the task is about…                               | Go To                              |
+| --- | ---------------------- | ---------------------------------------------------------- | ---------------------------------- |
+| 💻  | Code \| technical      | writing, fixing, debugging or refactoring code and scripts | [[NEOCORTEX/CODING\|CODING]]       |
+| 🤖  | Agents \| tools \| MCP | multi-step autonomous work, tool use, subagents, MCP       | [[NEOCORTEX/AUTOPILOT\|AUTOPILOT]] |
+| 🛡️ | Security \| safety     | secrets, permissions, destructive actions, untrusted input | [[NEOCORTEX/SECURITY\|SECURITY]]   |
+| 📊  | Data \| analysis       | datasets, SQL, metrics, statistics, spreadsheets           | [[NEOCORTEX/ANALYTICS\|ANALYTICS]] |
+
+### Thinking lobe
+|     | Task (Memory)              | Load when the task is about…                            | Go To                              |
+| --- | -------------------------- | ------------------------------------------------------- | ---------------------------------- |
+| 🧠  | Thinking \| decisions      | choosing between options, trade-offs, "should I…"       | [[NEOCORTEX/THINKING\|THINKING]]   |
+| 📋  | Planning \| projects       | turning goals into briefs, specs, roadmaps, task lists  | [[NEOCORTEX/PLANNING\|PLANNING]]   |
+| 🔎  | Research \| investigation  | finding, verifying or comparing information and sources | [[NEOCORTEX/RESEARCH\|RESEARCH]]   |
+| 🔄  | Review \| reflection       | critiquing a draft, plan or code; retros; feedback      | [[NEOCORTEX/REVIEW\|REVIEW]]       |
+| 📚  | Knowledge \| summarization | summarizing, extracting, filing notes in this vault     | [[NEOCORTEX/KNOWLEDGE\|KNOWLEDGE]] |
+| 🎓  | Learning \| teaching       | "teach me", tutoring, quizzes, study plans              | [[NEOCORTEX/LEARNING\|LEARNING]]   |
+
+### Communication lobe
+|     | Task (Memory)             | Load when the task is about…                            | Go To                              |
+| --- | ------------------------- | ------------------------------------------------------- | ---------------------------------- |
+| ✍️  | Writing \| communication  | emails, docs, posts, messages, editing prose            | [[NEOCORTEX/WRITING\|WRITING]]     |
+| 🌐  | Translation \| language   | translating, localizing, proofreading                   | [[NEOCORTEX/LANGUAGE\|LANGUAGE]]   |
+| 🖼️ | Images \| visual          | image prompts, diagrams, UI/web design, slides, video   | [[NEOCORTEX/VISUAL\|VISUAL]]       |
+| 💼  | Business \| marketing     | strategy, marketing copy, sales outreach, product specs | [[NEOCORTEX/BUSINESS\|BUSINESS]]   |
+| 💬  | Conversation \| assistant | general questions and advice; anything unmatched        | [[NEOCORTEX/ASSISTANT\|ASSISTANT]] |
+
+## Outside the neocortex
+|     | Task           | Load when the task is about…                     | Go To                                                                                |
+| --- | -------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| 📈  | Projects       | anything tied to a named project                 | [[PREFRONTAL/PREFRONTAL\|PREFRONTAL]], then the hub through AMYGDALA's `## Projects` |
+| 👤  | Personal layer | where a lesson goes; the human's own preferences | [[LIMBIC/LIMBIC\|LIMBIC]]                                                            |
