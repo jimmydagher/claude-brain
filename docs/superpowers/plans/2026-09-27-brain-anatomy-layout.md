@@ -20,7 +20,7 @@ tags:
 - Every vault note starts with `tags` frontmatter; no hard wraps (a paragraph or list item is one line); no em dashes; wikilinks carry the vault path (`[[NEOCORTEX/CODING|CODING]]`, `[[NEOCORTEX/CODING\|CODING]]` in tables).
 - File rewrites read and write bytes (`read_bytes().decode("utf-8")` / `write_bytes(...encode("utf-8"))`) so LF endings are kept.
 - Never stage a personal file: everything in `LIMBIC/` and `PREFRONTAL/` except `LIMBIC/LIMBIC.md` and `PREFRONTAL/PREFRONTAL.md`, plus `HIPPOCAMPUS/SYNAPSE.md`, `HIPPOCAMPUS/ENGRAM.md`, `.remember/`.
-- `NEOCORTEX/CODING.md` carries a local, uncommitted personal line: never stage that line (use `git add -p` for that file or leave its diff unstaged).
+- `MEMORY/CODING.md` carries a local, uncommitted personal line. Task 0 saves it as a patch and reverts it; Task 9 reapplies it to `NEOCORTEX/CODING.md`. It is never committed. Interactive git (`git add -p`, `-i`) is unavailable: stage whole files only.
 - ENGRAM is history: never rewrite `HIPPOCAMPUS/ENGRAM.md` entries.
 - Cortex: `python scripts/python/check.py` (ruff, mypy strict, pytest) must pass before each commit; every user- or operator-visible change adds a bullet to `CHANGELOG.md` › 🚧 Unreleased; never touch the human's uncommitted GUI work.
 - Commits end with `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
@@ -56,7 +56,17 @@ find "$BACKUP" -name "*.md" | wc -l
 
 - Expected: a count equal to `find CEREBELLUM PROJECTS HIPPOCAMPUS -name "*.md" | wc -l` in the vault. Write both numbers in the task log.
 
-- [ ] **Step 3: Ask the human to close Obsidian**, so it doesn't rewrite links during moves. Wait for confirmation.
+- [ ] **Step 3: Set aside the local CODING.md line**
+
+```bash
+git diff MEMORY/CODING.md > "$BACKUP/coding-local.patch"
+git checkout -- MEMORY/CODING.md
+git status --short MEMORY/CODING.md
+```
+
+- Expected: the patch file is non-empty and `git status` shows nothing for `MEMORY/CODING.md`.
+
+- [ ] **Step 3b: Ask the human to close Obsidian**, so it doesn't rewrite links during moves. Wait for confirmation.
 
 - [ ] **Step 4: Create the vault branch**
 
@@ -304,14 +314,13 @@ Set `.obsidian/app.json` to include the key (keep any other keys the file has):
 - [ ] **Step 7: Commit**
 
 ```bash
-git add scripts/check_brain.py scripts/test_check_brain.py
-git add -p .obsidian/app.json
+git add scripts/check_brain.py scripts/test_check_brain.py .obsidian/app.json
 git commit -m "Check ambiguous, personal and orphan links; skip docs/
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ```
 
-(`git add -p` on `app.json` stages only the `userIgnoreFilters` hunk unless the human said in Task 0 to commit the rest.)
+(Task 0 settled the human's own `app.json` changes: committed first, or reverted, so only `userIgnoreFilters` is new here.)
 
 ---
 
@@ -363,16 +372,15 @@ EOF
 - [ ] **Step 4: Commit**
 
 ```bash
-git add -A NEOCORTEX ':!NEOCORTEX/CODING.md'
+git add -A NEOCORTEX
 git add CORTEX.md README.md HIPPOCAMPUS/HIPPOCAMPUS.md CEREBELLUM/CEREBELLUM.md scripts/check_brain.py
-git add -p NEOCORTEX/CODING.md
 git status --short
 git commit -m "Rename MEMORY to NEOCORTEX
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ```
 
-In `git add -p NEOCORTEX/CODING.md`, stage the `MEMORY` → `NEOCORTEX` link hunks and skip the personal line. Before committing, `git status --short` must show no file under `PROJECTS/`, `CEREBELLUM/` other than the guide, or `HIPPOCAMPUS/` other than the guide.
+Before committing, `git status --short` must show no file under `PROJECTS/`, `CEREBELLUM/` other than the guide, or `HIPPOCAMPUS/` other than the guide.
 
 ---
 
@@ -456,7 +464,7 @@ git commit -m "Split routing out of CORTEX into THALAMUS
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ```
 
-If the human chose in Task 0 not to commit rule 16 separately, `git add -p CORTEX.md` still stages it here, since CORTEX's rewrite depends on it; tell the human.
+If the human chose in Task 0 not to commit rule 16 separately, it is committed here with the rewrite; tell the human.
 
 ---
 
@@ -644,8 +652,7 @@ git status --short
 
 ```bash
 git add .gitignore LIMBIC/LIMBIC.md PREFRONTAL/PREFRONTAL.md scripts/check_brain.py CORTEX.md THALAMUS.md README.md HIPPOCAMPUS/HIPPOCAMPUS.md
-git add -u NEOCORTEX CEREBELLUM ':!NEOCORTEX/CODING.md'
-git add -p NEOCORTEX/CODING.md
+git add -u NEOCORTEX CEREBELLUM
 git commit -m "Move the personal layer to LIMBIC (AMYGDALA router) and PREFRONTAL
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -1089,7 +1096,7 @@ Then by hand:
 
 ```bash
 git add -A config src tests README.md docs/cheat-sheet.md CLAUDE.md
-git add -p CHANGELOG.md
+git add CHANGELOG.md
 git commit -m "Adopt the NEOCORTEX/LIMBIC/PREFRONTAL layout with ! exemptions
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -1181,7 +1188,7 @@ README commands row: `Loads \`CORTEX.md\`, the router \`THALAMUS.md\` and your p
 
 ```bash
 git add src/cortex/brain.py src/cortex/mcp_tools.py tests/test_app.py README.md
-git add -p CHANGELOG.md
+git add CHANGELOG.md
 git commit -m "Return the router with CORTEX in cortex_load
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -1255,7 +1262,7 @@ A warning never flips `passed`. CHANGELOG Added: `- "check the brain" warns when
 
 ```bash
 git add src/cortex/brain.py tests/test_app.py
-git add -p CHANGELOG.md
+git add CHANGELOG.md
 git commit -m "Warn in check the brain when a layout folder isn't protected
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
@@ -1292,6 +1299,16 @@ HIPPOCAMPUS/HIPPOCAMPUS.md
 
 Call `cortex_load` (reload): the output shows `--- CORTEX.md ---`, `--- THALAMUS.md ---` and `--- LIMBIC/AMYGDALA.md ---` in that order. Call `cortex_check`: `Passed`, no `isn't protected` warning. Call `cortex_read('NEOCORTEX/CODING')`: header ends with `· protected`. Call `cortex_read('PREFRONTAL/PROJECTS/PROJECTS')`: no `· protected`.
 
-- [ ] **Step 5: Final report**
+- [ ] **Step 5: Restore the local CODING.md line**
+
+```bash
+BACKUP="/c/Users/jdagher/Development/projects/_backup/claude-brain-personal-2026-09-27"
+sed 's#MEMORY/CODING.md#NEOCORTEX/CODING.md#g' "$BACKUP/coding-local.patch" | git apply
+git diff --stat NEOCORTEX/CODING.md
+```
+
+- Expected: `1 file changed, 1 insertion(+)`, left uncommitted as before.
+
+- [ ] **Step 6: Final report**
 
 Report to the human: commits on each branch, check outputs (`check_brain.py`, unittest, `check.py`, `cortex_check`), the backup location, and anything skipped. Suggest removing the backup only after they've confirmed the graph looks right.
