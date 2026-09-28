@@ -2,7 +2,7 @@
 tags:
   - memory/technical
 ---
-> Scope: writing, fixing, debugging and refactoring code · Pairs with: [[MEMORY/REVIEW|REVIEW]] (code review), [[MEMORY/SECURITY|SECURITY]], [[MEMORY/AUTOPILOT|AUTOPILOT]]
+> Scope: writing, fixing, debugging and refactoring code · Pairs with: [[NEOCORTEX/REVIEW|REVIEW]] (code review), [[NEOCORTEX/SECURITY|SECURITY]], [[NEOCORTEX/AUTOPILOT|AUTOPILOT]]
 
 ## Core Rules (non-negotiable)
 

@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: image prompts, diagrams, UI/web design, slides, video · Pairs with: [[MEMORY/ANALYTICS|ANALYTICS]] (data charts), [[MEMORY/WRITING|WRITING]] (on-image copy), [[MEMORY/BUSINESS|BUSINESS]] (brand)
+> Scope: image prompts, diagrams, UI/web design, slides, video · Pairs with: [[NEOCORTEX/ANALYTICS|ANALYTICS]] (data charts), [[NEOCORTEX/WRITING|WRITING]] (on-image copy), [[NEOCORTEX/BUSINESS|BUSINESS]] (brand)
 
 ## Core Rules (non-negotiable)
 

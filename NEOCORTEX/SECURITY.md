@@ -2,7 +2,7 @@
 tags:
   - memory/technical
 ---
-> Scope: secrets, credentials, permissions, destructive actions, untrusted input, security review · Pairs with: [[MEMORY/AUTOPILOT|AUTOPILOT]], [[MEMORY/CODING|CODING]], [[MEMORY/REVIEW|REVIEW]]
+> Scope: secrets, credentials, permissions, destructive actions, untrusted input, security review · Pairs with: [[NEOCORTEX/AUTOPILOT|AUTOPILOT]], [[NEOCORTEX/CODING|CODING]], [[NEOCORTEX/REVIEW|REVIEW]]
 
 ## Core Rules (non-negotiable)
 

@@ -2,7 +2,7 @@
 tags:
   - memory/core
 ---
-> Scope: prompts, skills, agents, system prompts, CLAUDE.md/AGENTS.md, rules for this brain · Pairs with: [[MEMORY/AUTOPILOT|AUTOPILOT]], [[MEMORY/KNOWLEDGE|KNOWLEDGE]], [[MEMORY/REVIEW|REVIEW]], [[MEMORY/MECHANICS|MECHANICS]] (Markdown format)
+> Scope: prompts, skills, agents, system prompts, CLAUDE.md/AGENTS.md, rules for this brain · Pairs with: [[NEOCORTEX/AUTOPILOT|AUTOPILOT]], [[NEOCORTEX/KNOWLEDGE|KNOWLEDGE]], [[NEOCORTEX/REVIEW|REVIEW]], [[NEOCORTEX/MECHANICS|MECHANICS]] (Markdown format)
 
 ## Core Rules (non-negotiable)
 
@@ -28,7 +28,7 @@ Try 3+ realistic prompts with and without the instruction; refine from what actu
 - Be exact for fragile steps (exact commands), loose for open-ended ones.
 - Leave out facts that go stale or that config and `--help` already state.
 - Prompt skeleton: goal → context → task → constraints → output format → examples.
-- Brain area files: `tags` property (family, see [[MEMORY/MECHANICS|MECHANICS]]) → Scope line → Core Rules → Defaults → Avoid → Output.
+- Brain area files: `tags` property (family, see [[NEOCORTEX/MECHANICS|MECHANICS]]) → Scope line → Core Rules → Defaults → Avoid → Output.
 - Skills: `name` up to 64 chars, lowercase with hyphens; `description` up to 1,024 chars; steps first, reference after.
 
 ## Avoid

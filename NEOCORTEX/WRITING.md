@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: emails, docs, posts, messages, editing prose · Pairs with: [[MEMORY/BUSINESS|BUSINESS]] (marketing copy), [[MEMORY/LANGUAGE|LANGUAGE]], [[MEMORY/REVIEW|REVIEW]], [[MEMORY/MECHANICS|MECHANICS]] (.md files)
+> Scope: emails, docs, posts, messages, editing prose · Pairs with: [[NEOCORTEX/BUSINESS|BUSINESS]] (marketing copy), [[NEOCORTEX/LANGUAGE|LANGUAGE]], [[NEOCORTEX/REVIEW|REVIEW]], [[NEOCORTEX/MECHANICS|MECHANICS]] (.md files)
 
 ## Core Rules (non-negotiable)
 

@@ -73,7 +73,7 @@ def body(lines):
 def slop_pattern():
     """Build a matcher from WRITING.md's slop list, so the list lives in one place."""
     words, phrases = [], []
-    writing = ROOT / "MEMORY" / "WRITING.md"
+    writing = ROOT / "NEOCORTEX" / "WRITING.md"
     if writing.exists():
         for line in writing.read_text(encoding="utf-8").splitlines():
             if line.startswith("- Words:"):
@@ -159,7 +159,7 @@ def check_ids(errors):
 
 def check_repeats(warnings):
     seen = {}
-    for path in [ROOT / "CORTEX.md", *sorted((ROOT / "MEMORY").glob("*.md"))]:
+    for path in [ROOT / "CORTEX.md", *sorted((ROOT / "NEOCORTEX").glob("*.md"))]:
         for n, text, _ in body(path.read_text(encoding="utf-8").splitlines()):
             key = re.sub(r"\s+", " ", re.sub(r"^[\s>*+-]*(\d+\.\s*)?", "", text)).strip().lower()
             if len(key.split()) >= 12:

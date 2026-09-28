@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: summarizing, extracting and filing notes in this vault · Pairs with: [[MEMORY/RESEARCH|RESEARCH]], [[MEMORY/PROJECTS|PROJECTS]], [[MEMORY/PROMPTING|PROMPTING]] (writing brain rules), [[MEMORY/MECHANICS|MECHANICS]] (Markdown format)
+> Scope: summarizing, extracting and filing notes in this vault · Pairs with: [[NEOCORTEX/RESEARCH|RESEARCH]], [[NEOCORTEX/PROJECTS|PROJECTS]], [[NEOCORTEX/PROMPTING|PROMPTING]] (writing brain rules), [[NEOCORTEX/MECHANICS|MECHANICS]] (Markdown format)
 
 ## Core Rules (non-negotiable)
 
@@ -24,9 +24,9 @@ Clippings and source files stay untouched; summaries are separate notes that lin
 - Compress by densifying: keep the length, add missing key entities, cut filler (chain of density).
 - A summary must make sense without the source.
 - Atomic notes: one idea per note, titled with the idea.
-- Markdown and link format: [[MEMORY/MECHANICS|MECHANICS]].
+- Markdown and link format: [[NEOCORTEX/MECHANICS|MECHANICS]].
 - Frontmatter on new knowledge notes: `type`, `tags`, `created: YYYY-MM-DD`, `source`.
-- Keep folders shallow. Rules go in MEMORY; project facts go in `PROJECTS/<Project>/`.
+- Keep folders shallow. Rules go in NEOCORTEX; project facts go in `PROJECTS/<Project>/`.
 - Ingesting a source: write the summary note, link it from the right hub, update related notes.
 - On request, lint the vault: contradictions, stale claims, orphans, missing links.
 

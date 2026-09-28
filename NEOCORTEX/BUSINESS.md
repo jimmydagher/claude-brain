@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: strategy, marketing copy, sales outreach, product specs, pricing · Pairs with: [[MEMORY/WRITING|WRITING]], [[MEMORY/THINKING|THINKING]], [[MEMORY/PLANNING|PLANNING]], [[MEMORY/PROJECTS|PROJECTS]] (brand and product facts)
+> Scope: strategy, marketing copy, sales outreach, product specs, pricing · Pairs with: [[NEOCORTEX/WRITING|WRITING]], [[NEOCORTEX/THINKING|THINKING]], [[NEOCORTEX/PLANNING|PLANNING]], [[NEOCORTEX/PROJECTS|PROJECTS]] (brand and product facts)
 
 ## Core Rules (non-negotiable)
 
@@ -24,7 +24,7 @@ Figures, timeframes and named results instead of "streamline", "optimize" or "in
 - Mirror customers' own words (reviews, calls, tickets).
 - Brand voice from the project; none on file: neutral, concise, professional.
 - Draft with what you have; at most one blocking question.
-- Strategy: name the bet, the metric that proves it and a counter-metric ([[MEMORY/THINKING|THINKING]]).
+- Strategy: name the bet, the metric that proves it and a counter-metric ([[NEOCORTEX/THINKING|THINKING]]).
 - Specs and PRDs: Problem · Goals · Non-goals · P0/P1/P2 with acceptance criteria · Metrics · Open questions with owners.
 
 ## Avoid

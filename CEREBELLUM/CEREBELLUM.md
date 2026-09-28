@@ -15,7 +15,7 @@ Store each fact at the narrowest level where it is still true:
 | Level | Example | Home |
 | --- | --- | --- |
 | Standard | Every system needs logging | SDSI or the team standard |
-| Universal rule | Never game the checks | a MEMORY area file |
+| Universal rule | Never game the checks | a NEOCORTEX area file |
 | Me, all projects | My logs are plain text, one line per event | CEREBELLUM |
 | One project | This project's stack | the PROJECTS hub |
 | One machine | Paths, shell, OS | CEREBELLUM, environment file |
@@ -31,7 +31,7 @@ Everything in CEREBELLUM except this guide is untracked by git, so the public re
 
 ## Where a lesson goes
 Run the tests in order. When they disagree, ask the human.
-1. **Another-dev test.** Would the rule still be right for a different person using this brain? Yes: MEMORY. No: CEREBELLUM.
+1. **Another-dev test.** Would the rule still be right for a different person using this brain? Yes: NEOCORTEX. No: CEREBELLUM.
 2. **What vs how.** A requirement ("logs must exist") is global. A choice among valid options ("plain text, one line per event") is personal.
 3. **Violation cost.** Breaking it makes something unsafe, broken or inconsistent for others: global. It only annoys the human: personal.
 4. **Portability.** Would the human carry it to a new machine or employer? Taste travels with them; environment facts stay with the machine.
@@ -50,6 +50,6 @@ The destination goes in the SYNAPSE entry: `→ CODING` for global, `→ CEREBEL
 
 ## Avoid
 - Secrets or credentials: never, anywhere in the brain.
-- A personal choice stored in a MEMORY area file, or a universal rule stored here.
+- A personal choice stored in a NEOCORTEX area file, or a universal rule stored here.
 - Loading a whole CEREBELLUM file when one section was linked.
 - Duplicating a fact across sections instead of linking to `## MACHINE`.

@@ -21,7 +21,7 @@ tags:
 Next ID: HX0001
 
 ## Pending
-<!-- Format: - [ ] HX0001 · YYYY-MM-DD · → MEMORY/FILE › Section or → CEREBELLUM/FILE#Section · proposed change · why · source (correction, preference, research) -->
+<!-- Format: - [ ] HX0001 · YYYY-MM-DD · → NEOCORTEX/FILE › Section or → CEREBELLUM/FILE#Section · proposed change · why · source (correction, preference, research) -->
 ```
 
 ## ENGRAM.md template
@@ -33,6 +33,6 @@ tags:
 > Trail of evaluated SYNAPSE entries, newest first: `[x]` committed, `[-]` rejected so it isn't proposed again. Search it; don't load it whole. Queue: [[HIPPOCAMPUS/SYNAPSE|SYNAPSE]]
 
 ## Trail
-<!-- Committed: - [x] HX0001 · proposed YYYY-MM-DD · committed YYYY-MM-DD · landed in MEMORY/FILE › Section or CEREBELLUM/FILE#Section · summary -->
+<!-- Committed: - [x] HX0001 · proposed YYYY-MM-DD · committed YYYY-MM-DD · landed in NEOCORTEX/FILE › Section or CEREBELLUM/FILE#Section · summary -->
 <!-- Rejected: - [-] HX0002 · proposed YYYY-MM-DD · rejected YYYY-MM-DD · summary · reason -->
 ```

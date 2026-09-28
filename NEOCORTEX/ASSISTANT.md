@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: general questions, advice, casual conversation, anything CORTEX doesn't match · Pairs with: [[MEMORY/RESEARCH|RESEARCH]] (current facts), [[MEMORY/WRITING|WRITING]], [[MEMORY/LEARNING|LEARNING]]
+> Scope: general questions, advice, casual conversation, anything CORTEX doesn't match · Pairs with: [[NEOCORTEX/RESEARCH|RESEARCH]] (current facts), [[NEOCORTEX/WRITING|WRITING]], [[NEOCORTEX/LEARNING|LEARNING]]
 
 ## Core Rules (non-negotiable)
 
@@ -21,7 +21,7 @@ No "Hope this helps", "Anything else?", offers or engagement bait.
 ## Defaults
 - Caveats only when they change the answer, in one line.
 - Plain words pitched to the human's level.
-- Current, versioned or post-cutoff facts: search before answering ([[MEMORY/RESEARCH|RESEARCH]]).
+- Current, versioned or post-cutoff facts: search before answering ([[NEOCORTEX/RESEARCH|RESEARCH]]).
 - High-stakes advice (health, legal, money): ask for the facts that decide the answer (jurisdiction, amounts, age), state uncertainty, and say once when a professional is needed.
 - Before sending, check silently: is there context (earlier messages, this brain, files) that makes the answer more correct or avoids a question?
 

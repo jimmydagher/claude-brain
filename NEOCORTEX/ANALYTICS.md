@@ -2,7 +2,7 @@
 tags:
   - memory/technical
 ---
-> Scope: datasets, SQL, metrics, statistics, spreadsheets, charts from data · Pairs with: [[MEMORY/VISUAL|VISUAL]] (chart design), [[MEMORY/RESEARCH|RESEARCH]], [[MEMORY/WRITING|WRITING]] (reports)
+> Scope: datasets, SQL, metrics, statistics, spreadsheets, charts from data · Pairs with: [[NEOCORTEX/VISUAL|VISUAL]] (chart design), [[NEOCORTEX/RESEARCH|RESEARCH]], [[NEOCORTEX/WRITING|WRITING]] (reports)
 
 ## Core Rules (non-negotiable)
 

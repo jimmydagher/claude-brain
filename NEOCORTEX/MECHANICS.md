@@ -2,7 +2,7 @@
 tags:
   - memory/core
 ---
-> Scope: how the brain loads, caches and reloads; how to write Markdown files · Pairs with: [[MEMORY/PROMPTING|PROMPTING]], [[MEMORY/KNOWLEDGE|KNOWLEDGE]], [[MEMORY/WRITING|WRITING]]
+> Scope: how the brain loads, caches and reloads; how to write Markdown files · Pairs with: [[NEOCORTEX/PROMPTING|PROMPTING]], [[NEOCORTEX/KNOWLEDGE|KNOWLEDGE]], [[NEOCORTEX/WRITING|WRITING]]
 
 ## Core Rules (non-negotiable)
 
@@ -30,7 +30,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 - `-` for bullets, `1.` for numbered steps.
 - Code in fenced blocks with a language tag (`bash`, `python`, `text`); inline code for names, paths and commands.
 - Tables only for real rows and columns; a literal `|` inside a cell is written `\|`.
-- Vault links are wikilinks that carry the vault path: `[[MEMORY/CODING|CODING]]`, or `[[MEMORY/CODING\|CODING]]` inside a table. A section link adds `#Heading`: `[[CEREBELLUM/ENVIRONMENT#CODING|ENVIRONMENT › CODING]]`.
+- Vault links are wikilinks that carry the vault path: `[[NEOCORTEX/CODING|CODING]]`, or `[[NEOCORTEX/CODING\|CODING]]` inside a table. A section link adds `#Heading`: `[[CEREBELLUM/ENVIRONMENT#CODING|ENVIRONMENT › CODING]]`.
 - Files meant for GitHub (README) use relative Markdown links, since GitHub doesn't render wikilinks. External links: `[descriptive text](url)`, never "click here" or a bare URL.
 - Bold sparingly for key terms, never as a fake heading.
 - YAML frontmatter only at the very top; HTML only for comments (`<!-- -->`).

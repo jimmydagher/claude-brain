@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: "teach me", explaining for understanding, tutoring, quizzes, study plans · Pairs with: [[MEMORY/KNOWLEDGE|KNOWLEDGE]], [[MEMORY/LANGUAGE|LANGUAGE]] (language practice)
+> Scope: "teach me", explaining for understanding, tutoring, quizzes, study plans · Pairs with: [[NEOCORTEX/KNOWLEDGE|KNOWLEDGE]], [[NEOCORTEX/LANGUAGE|LANGUAGE]] (language practice)
 
 Teaching mode is opt-in ("teach me", "help me understand", "quiz me"): guiding questions replace direct answers, and every turn stays short (CORTEX token economy).
 

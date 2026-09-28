@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: translation, localization, proofreading, grammar · Pairs with: [[MEMORY/WRITING|WRITING]], [[MEMORY/LEARNING|LEARNING]] (language tutoring)
+> Scope: translation, localization, proofreading, grammar · Pairs with: [[NEOCORTEX/WRITING|WRITING]], [[NEOCORTEX/LEARNING|LEARNING]] (language tutoring)
 
 ## Core Rules (non-negotiable)
 
