@@ -166,7 +166,8 @@ Separate release (0.3.0) in the `cortex` repo, on its own branch, started only a
 - `cortex_check`: warns when a layout folder (memory, limbic, personal) is not covered by a protected rule, so a stale protected list is visible.
 - Text updates: `INSTRUCTIONS` in `mcp_tools.py`, SYNAPSE/ENGRAM template comments in `synapse.py`, docstring examples, `README.md`, `docs/cheat-sheet.md`, skeleton brain (`skeleton/MEMORY/GENERAL.md` → `skeleton/NEOCORTEX/GENERAL.md`, plus a skeleton `THALAMUS.md`).
 - Tests: update fixtures to the new layout; add tests for the `!` exemption, the router in `overview`, and the unprotected-layout warning.
-- After deploy: reset the protected list to the new defaults (re-run setup or save settings with an empty list) and confirm via `status()`.
+- After deploy: replace the protected list in the GUI's Settings with the new defaults, one per line, and confirm via `status()`. Saving an empty list protects nothing, so never clear it.
+- The server's template brain is `jimmydagher/claude-brain` on GitHub; `tests/test_integration.py` downloads it and passes only after the reorganized vault is pushed.
 
 ## Link integrity
 
@@ -183,14 +184,14 @@ Verification after each step: `python scripts/check_brain.py` shows 0 errors; a 
 
 Each step is one commit in `claude-brain`, verified before the next.
 0. Safety: copy `PROJECTS/`, `CEREBELLUM/` and `HIPPOCAMPUS/` (untracked files) to a dated backup outside the vault; close Obsidian during moves.
-1. `MEMORY/` → `NEOCORTEX/`; rewrite links; numbered references → heading links.
-2. Split CORTEX into CORTEX + THALAMUS.
-3. Personal layer: create LIMBIC and PREFRONTAL guides from CEREBELLUM's guide and `MEMORY/PROJECTS.md`; move MAP → AMYGDALA and PROJECTS → `PREFRONTAL/PROJECTS/` (INDEX → PROJECTS.md); update `.gitignore`; remove CEREBELLUM and `NEOCORTEX/PROJECTS.md`.
-4. Lobes: `NEOCORTEX/NEOCORTEX.md`; THALAMUS table grouped by lobe; MECHANICS Tags section.
-5. `check_brain.py` upgrades, README, Obsidian exclusion for `docs/`.
+1. `check_brain.py` upgrades (new checks first, so every later step is verified by them) and Obsidian exclusion for `docs/`.
+2. `MEMORY/` → `NEOCORTEX/`; rewrite links.
+3. Split CORTEX into CORTEX + THALAMUS; numbered references → heading links.
+4. Personal layer: create LIMBIC and PREFRONTAL guides from CEREBELLUM's guide and `MEMORY/PROJECTS.md`; move MAP → AMYGDALA and PROJECTS → `PREFRONTAL/PROJECTS/` (INDEX → PROJECTS.md); update `.gitignore`; remove CEREBELLUM and `NEOCORTEX/PROJECTS.md`. A scripted rename turns every remaining CEREBELLUM, MAP and PROJECTS reference (in CORTEX and THALAMUS too) into its new name.
+5. Lobes: `NEOCORTEX/NEOCORTEX.md`; THALAMUS table grouped by lobe; MECHANICS Tags section; README.
 6. Cortex server 0.3.0, deploy, reset protected list, verify.
 
-Between step 3 and step 6 the deployed server still looks for `CEREBELLUM/MAP.md` (it skips a missing map silently) and still protects `MEMORY/` (which no longer exists), so NEOCORTEX is unprotected on the server until step 6. Steps 1-6 run in one session to keep that window short.
+Between step 2 and step 6 the deployed server still looks for `CEREBELLUM/MAP.md` (it skips a missing map silently) and still protects `MEMORY/` (which no longer exists), so NEOCORTEX is unprotected on the server until step 6. Steps 1-6 run in one session to keep that window short.
 
 ## Out of scope
 
