@@ -5,8 +5,8 @@ python scripts/check_brain.py           whole vault
 python scripts/check_brain.py FILE...   only these files
 python scripts/check_brain.py --hook    Claude Code PostToolUse hook: checks the file just written
 
-Errors: dead wikilinks and heading links, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
-Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines and CEREBELLUM sections over the size cap.
+Errors: dead wikilinks and heading links, ambiguous bare-name links, tracked notes linking to personal notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
+Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, orphan notes and personal sections over the size cap.
 Exit: 0 no errors, 1 errors, 2 errors in --hook mode (Claude Code shows them to Claude).
 """
 import json
@@ -15,9 +15,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts"}
+SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts", "docs"}
 UNTAGGED_OK = {"README.md"}
 HIPPOCAMPUS = ("HIPPOCAMPUS/SYNAPSE.md", "HIPPOCAMPUS/ENGRAM.md")
+PERSONAL = ("limbic/", "prefrontal/")
+PERSONAL_GUIDES = {"limbic/limbic", "prefrontal/prefrontal"}
+ROOTS = {"cortex", "readme", "limbic/amygdala", "hippocampus/synapse", "hippocampus/engram"}
 HEADING = re.compile(r"#{1,6}\s+(.*)")
 BLOCK = re.compile(r"\s*([#>|*+-]|\d+\.\s|<!--)")
 LINK = re.compile(r"\[\[([^\]|#\\]+)(?:#([^\]|\\]+))?")
@@ -35,6 +38,11 @@ def is_note(path):
 
 def rel(path):
     return path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
+
+
+def is_personal(key):
+    """Whether a lowercase vault key (path without .md) is an untracked personal note."""
+    return key.startswith(PERSONAL) and key not in PERSONAL_GUIDES
 
 
 def frontmatter(lines):
@@ -90,13 +98,15 @@ def build_index():
     return paths, names, heads
 
 
-def check_note(path, slop, index, errors, warnings):
+def check_note(path, slop, index, errors, warnings, linked):
     name = rel(path)
     lines = path.read_text(encoding="utf-8").splitlines()
     front = frontmatter(lines)
     if name not in UNTAGGED_OK and not (front and any(line.startswith("tags:") for line in front)):
         errors.append(f"{name}:1: missing tags frontmatter")
     paths, names, heads = index
+    own = name[:-3].lower()
+    tracked = not is_personal(own) and name not in HIPPOCAMPUS
     prev_plain = False
     for n, text, section in body(lines):
         plain = bool(text.strip()) and not BLOCK.match(text)
@@ -108,7 +118,13 @@ def check_note(path, slop, index, errors, warnings):
             found = ([key] if key in paths else []) if "/" in key else names.get(key, [])
             if not found:
                 errors.append(f"{name}:{n}: dead link [[{target.strip()}]]")
-            elif heading and not heading.startswith("^") and not any(heading.strip().lower() in heads[f] for f in found):
+                continue
+            if "/" not in key and len(found) > 1:
+                errors.append(f"{name}:{n}: ambiguous link [[{target.strip()}]] matches {', '.join(sorted(found))}: use the full path")
+            if tracked and any(is_personal(f) for f in found):
+                errors.append(f"{name}:{n}: tracked note links to personal note [[{target.strip()}]]: only AMYGDALA points into PREFRONTAL")
+            linked.update(f for f in found if f != own)
+            if heading and not heading.startswith("^") and not any(heading.strip().lower() in heads[f] for f in found):
                 errors.append(f"{name}:{n}: dead heading link [[{target.strip()}#{heading.strip()}]]")
         if "—" in text:
             errors.append(f"{name}:{n}: em dash")
@@ -153,6 +169,14 @@ def check_repeats(warnings):
             warnings.append(f"{places[0]}: line repeated in {', '.join(places[1:])}: give it one home")
 
 
+def check_orphans(files, linked, warnings):
+    """Warn about notes no other note links to (roots excepted)."""
+    for path in files:
+        key = rel(path)[:-3].lower()
+        if key not in linked and key not in ROOTS:
+            warnings.append(f"{rel(path)}: orphan: no note links here")
+
+
 def check_cerebellum(warnings):
     """Warn when a CEREBELLUM section outgrows the cap: it splits into its own file."""
     for path in sorted((ROOT / "CEREBELLUM").glob("*.md")):
@@ -170,7 +194,8 @@ def check_cerebellum(warnings):
 
 def main():
     for stream in (sys.stdout, sys.stderr):
-        stream.reconfigure(errors="replace")
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="replace")
     hook = "--hook" in sys.argv
     args = [a for a in sys.argv[1:] if a != "--hook"]
     if hook:
@@ -183,14 +208,15 @@ def main():
         files = [target]
     else:
         files = [Path(a).resolve() for a in args] or sorted(p for p in ROOT.rglob("*.md") if is_note(p))
-    errors, warnings = [], []
+    errors, warnings, linked = [], [], set()
     slop, index = slop_pattern(), build_index()
     for path in files:
-        check_note(path, slop, index, errors, warnings)
+        check_note(path, slop, index, errors, warnings, linked)
     if not hook or rel(files[0]) in HIPPOCAMPUS:
         check_ids(errors)
     if not hook and not args:
         check_repeats(warnings)
+        check_orphans(files, linked, warnings)
         check_cerebellum(warnings)
     out = sys.stderr if hook else sys.stdout
     for line in errors + warnings:
