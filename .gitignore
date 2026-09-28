@@ -17,10 +17,11 @@ desktop.ini
 .claude/settings.local.json
 __pycache__/
 
-# Personal layers: live in the vault, never in the public repo (CEREBELLUM's guide stays: it is generic)
-CEREBELLUM/*
-!CEREBELLUM/CEREBELLUM.md
-PROJECTS/
+# Personal layers: live in the vault, never in the public repo (the LIMBIC and PREFRONTAL guides stay: they are generic)
+LIMBIC/*
+!LIMBIC/LIMBIC.md
+PREFRONTAL/*
+!PREFRONTAL/PREFRONTAL.md
 .remember/
 
 # In-transit proposals and their trail: only the HIPPOCAMPUS guide is shared

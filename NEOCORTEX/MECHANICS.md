@@ -19,7 +19,7 @@ Re-read CORTEX, THALAMUS and the area files in use when the human says "reload t
 One paragraph or list item is one line, however long. Let the editor soft-wrap; never insert line breaks to fit a narrow window.
 
 ## Session
-- Order: CORTEX first, then area files as tasks need them (plus the CEREBELLUM sections `CEREBELLUM/MAP.md` lists for the area), then project notes (a hub's `## Now` first). SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
+- Order: CORTEX first, then area files as tasks need them (plus the PREFRONTAL sections `LIMBIC/AMYGDALA.md` lists for the area), then project notes (a hub's `## Now` first). SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
 - Per-task announcements follow [[THALAMUS#Routing Rules|THALAMUS › Routing Rules]] (rule 3) (`Brain: CODING + SECURITY`); don't repeat `Brain: on`.
 - Always-on setups import CORTEX in CLAUDE.md (`@path`), so it loads at session start, is prompt-cached and survives compaction. If CORTEX is already in context that way, skip the read in RULE#1.
 
@@ -30,7 +30,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 - `-` for bullets, `1.` for numbered steps.
 - Code in fenced blocks with a language tag (`bash`, `python`, `text`); inline code for names, paths and commands.
 - Tables only for real rows and columns; a literal `|` inside a cell is written `\|`.
-- Vault links are wikilinks that carry the vault path: `[[NEOCORTEX/CODING|CODING]]`, or `[[NEOCORTEX/CODING\|CODING]]` inside a table. A section link adds `#Heading`: `[[CEREBELLUM/ENVIRONMENT#CODING|ENVIRONMENT › CODING]]`.
+- Vault links are wikilinks that carry the vault path: `[[NEOCORTEX/CODING|CODING]]`, or `[[NEOCORTEX/CODING\|CODING]]` inside a table. A section link adds `#Heading`: `[[PREFRONTAL/ENVIRONMENT#CODING|ENVIRONMENT › CODING]]`.
 - Files meant for GitHub (README) use relative Markdown links, since GitHub doesn't render wikilinks. External links: `[descriptive text](url)`, never "click here" or a bare URL.
 - Bold sparingly for key terms, never as a fake heading.
 - YAML frontmatter only at the very top; HTML only for comments (`<!-- -->`).
@@ -41,13 +41,13 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 - Families: `memory/core` (the brain itself), `memory/technical` (build, operate, secure, data), `memory/thinking` (reason, plan, research, review, learn, file knowledge), `memory/communication` (write, translate, design, sell, converse).
 - Project notes: `project/<name>` (lowercase, hyphens); the PROJECTS index: `project`.
 - HIPPOCAMPUS notes: `hippocampus`, left uncolored in the graph because they aren't memory yet.
-- CEREBELLUM notes: `memory/personal`, also left uncolored: it is a separate personal layer, and a sixth color can't be told apart from the other five.
+- PREFRONTAL notes: `memory/personal`, also left uncolored: it is a separate personal layer, and a sixth color can't be told apart from the other five.
 - New areas join an existing family: a sixth graph color can't be told apart from the other five in both themes.
 
 ## Check the brain
 On "check the brain", audit and report; change nothing during the audit (fixes go through SYNAPSE).
 - Run `python scripts/check_brain.py` when available: dead links and dead heading links, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs, repeated lines, slop-list hits.
-- Then judge what a script can't: rules that contradict each other across files, rules that change no behavior, area files over ~80 lines, CEREBELLUM sections over ~150, SYNAPSE entries pending for more than 30 days.
+- Then judge what a script can't: rules that contradict each other across files, rules that change no behavior, area files over ~80 lines, PREFRONTAL sections over ~150, SYNAPSE entries pending for more than 30 days.
 
 ## Avoid
 - Hard-wrapped paragraphs or bullets.

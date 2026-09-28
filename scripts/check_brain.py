@@ -177,10 +177,10 @@ def check_orphans(files, linked, warnings):
             warnings.append(f"{rel(path)}: orphan: no note links here")
 
 
-def check_cerebellum(warnings):
-    """Warn when a CEREBELLUM section outgrows the cap: it splits into its own file."""
-    for path in sorted((ROOT / "CEREBELLUM").glob("*.md")):
-        if path.name == "CEREBELLUM.md":
+def check_prefrontal(warnings):
+    """Warn when a PREFRONTAL preference section outgrows the cap: it splits into its own file."""
+    for path in sorted((ROOT / "PREFRONTAL").glob("*.md")):
+        if path.name == "PREFRONTAL.md":
             continue
         title, count = None, 0
         for line in path.read_text(encoding="utf-8").splitlines() + ["## "]:
@@ -217,7 +217,7 @@ def main():
     if not hook and not args:
         check_repeats(warnings)
         check_orphans(files, linked, warnings)
-        check_cerebellum(warnings)
+        check_prefrontal(warnings)
     out = sys.stderr if hook else sys.stdout
     for line in errors + warnings:
         print(line, file=out)

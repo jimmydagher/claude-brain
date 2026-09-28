@@ -12,8 +12,8 @@ The **router**: it tells you where to go, not what to know. The linked files tel
 1. Identify the **primary intent**.
 2. Go directly to its instruction file.
 3. Inform the human which part of the brain (memory) you are using, as your first line: `Brain: CODING + SECURITY`. Multiple sections is ok to use **if required by the intent**.
-4. Read additional files **only when required**: at most 3 brain files besides CORTEX, THALAMUS and the personal map before answering.
-5. Follow links from that file when deeper context is needed: one hop, no chains. Personal layer: if `CEREBELLUM/MAP.md` exists, it loads with CORTEX and THALAMUS; load only the sections it lists for the task's area (and its `Always` ones); they don't count toward the 3-file cap. No map: skip. Rules: [[CEREBELLUM/CEREBELLUM|CEREBELLUM]].
+4. Read additional files **only when required**: at most 3 brain files besides CORTEX, THALAMUS and AMYGDALA before answering.
+5. Follow links from that file when deeper context is needed: one hop, no chains. Personal layer: if `LIMBIC/AMYGDALA.md` exists, it loads with CORTEX and THALAMUS; load only the sections it lists for the task's area (and its `Always` ones); they don't count toward the 3-file cap. No AMYGDALA: skip. Rules: [[LIMBIC/LIMBIC|LIMBIC]].
 6. Do not load unrelated knowledge. Don't re-read a file already loaded this session unless it changed or the human says "reload the brain".
 7. Prefer existing knowledge over creating duplicates.
 8. When creating knowledge, add appropriate `[[wikilinks]]`.
@@ -39,4 +39,4 @@ The **router**: it tells you where to go, not what to know. The linked files tel
 | 🎓  | Learning \| teaching       | "teach me", tutoring, quizzes, study plans                 | [[NEOCORTEX/LEARNING\|LEARNING]]   |
 | 🧩  | Prompts \| skills          | prompts, skills, agents, CLAUDE.md, rules for this brain   | [[NEOCORTEX/PROMPTING\|PROMPTING]] |
 | 🔧  | Mechanics \| Markdown      | writing any .md file; how the brain loads, caches, reloads | [[NEOCORTEX/MECHANICS\|MECHANICS]] |
-| 📈  | Projects                   | anything tied to a named project                           | [[NEOCORTEX/PROJECTS\|PROJECTS]]   |
+| 📈  | Projects                   | anything tied to a named project                           | [[PREFRONTAL/PREFRONTAL\|PREFRONTAL]]   |

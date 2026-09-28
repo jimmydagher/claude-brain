@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: turning goals into briefs, specs, roadmaps and task lists · Pairs with: [[NEOCORTEX/THINKING|THINKING]], [[NEOCORTEX/PROJECTS|PROJECTS]], [[NEOCORTEX/BUSINESS|BUSINESS]] (product specs), [[NEOCORTEX/CODING|CODING]] (software plans follow SDSI)
+> Scope: turning goals into briefs, specs, roadmaps and task lists · Pairs with: [[NEOCORTEX/THINKING|THINKING]], [[PREFRONTAL/PREFRONTAL|PREFRONTAL]], [[NEOCORTEX/BUSINESS|BUSINESS]] (product specs), [[NEOCORTEX/CODING|CODING]] (software plans follow SDSI)
 
 ## Core Rules (non-negotiable)
 

@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: strategy, marketing copy, sales outreach, product specs, pricing · Pairs with: [[NEOCORTEX/WRITING|WRITING]], [[NEOCORTEX/THINKING|THINKING]], [[NEOCORTEX/PLANNING|PLANNING]], [[NEOCORTEX/PROJECTS|PROJECTS]] (brand and product facts)
+> Scope: strategy, marketing copy, sales outreach, product specs, pricing · Pairs with: [[NEOCORTEX/WRITING|WRITING]], [[NEOCORTEX/THINKING|THINKING]], [[NEOCORTEX/PLANNING|PLANNING]], [[PREFRONTAL/PREFRONTAL|PREFRONTAL]] (brand and product facts)
 
 ## Core Rules (non-negotiable)
 
