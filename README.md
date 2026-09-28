@@ -61,15 +61,18 @@ Every note carries one tag, and `.obsidian/graph.json` colors the graph by tag:
 
 | Tag | Notes | Color |
 | --- | --- | --- |
-| `memory/core` | CORTEX, the NEOCORTEX index, MECHANICS, PROMPTING | blue `#2a78d6` |
+| `memory/core/entry` | CORTEX, the entry point | red `#e34948` |
+| `memory/core` | the NEOCORTEX index, MECHANICS, PROMPTING | blue `#2a78d6` |
 | `memory/technical` | CODING, AUTOPILOT, SECURITY, ANALYTICS | green `#008300` |
 | `memory/thinking` | THINKING, PLANNING, RESEARCH, REVIEW, KNOWLEDGE, LEARNING | aqua `#1baf7a` |
 | `memory/communication` | WRITING, LANGUAGE, VISUAL, BUSINESS, ASSISTANT | gold `#c98500` |
-| `project`, `project/<name>` | the project list and every project note | red `#e34948` |
-| `hippocampus` | SYNAPSE, ENGRAM | uncolored: not memory yet |
+| `project`, `project/<name>` | the project list and every project note | magenta `#b0339a` |
+| `hippocampus` | SYNAPSE, ENGRAM | purple `#5b52e0` |
 | `memory/personal` | everything in PREFRONTAL except projects | uncolored: a personal layer |
 
-The five colors were checked against Obsidian's light and dark backgrounds and for color-blind vision. A sixth color would clash with one of them, so new areas join an existing lobe.
+Obsidian uses the first group a note matches, so the entry group sits above `memory/core`. The colors were checked as a set with a palette validator, against Obsidian's light and dark backgrounds and for color-blind vision; one weak pair remains, hippocampus purple and core blue, which some color-blind readers can't tell apart (their notes sit in different regions of the graph). New areas join an existing lobe rather than adding a color.
+
+Cortex's graph view reads the same file, so its colors match, and it also marks CORTEX with a dark yellow label and a soft orange glow; Obsidian's graph can't style a single label.
 
 Obsidian keeps graph settings in memory and writes them back to `graph.json` whenever the graph changes. After editing that file outside Obsidian, run **Reload app without saving** from the command palette before opening the graph, or the in-memory copy can overwrite your edit.
 

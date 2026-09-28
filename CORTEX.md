@@ -1,6 +1,6 @@
 ---
 tags:
-  - memory/core
+  - memory/core/entry
 ---
 # AI Second Brain
 

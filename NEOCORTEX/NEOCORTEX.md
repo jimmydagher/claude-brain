@@ -57,7 +57,7 @@ Projects and personal preferences aren't areas: they live in PREFRONTAL, which C
 - Membership is listed in one place only: the routing table above.
 - Each area has one home lobe, the one whose tasks it serves most often. Never copy a file into a second lobe.
 - Cross-lobe connections are the `Pairs with` wikilinks in each area's scope line: the synapses between lobes. An area that often works with another adds it there.
-- A new area joins an existing lobe: a new lobe would need a sixth graph color, which can't be told apart from the other five in both themes.
+- A new area joins an existing lobe: a new lobe would need another graph color, and every color must stay distinguishable from the rest in both themes and for color-blind readers.
 
 | Lobe | Tag | Covers | Graph color |
 | --- | --- | --- | --- |

@@ -39,11 +39,11 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 
 ## Tags
 - Every brain note starts with a `tags` property (YAML list); the graph colors come from it (`.obsidian/graph.json`).
-- Lobes, their tags and what each covers: [[NEOCORTEX/NEOCORTEX#Lobes|NEOCORTEX › Lobes]]. CORTEX and the NEOCORTEX index take `memory/core`.
+- Lobes, their tags and what each covers: [[NEOCORTEX/NEOCORTEX#Lobes|NEOCORTEX › Lobes]]. The NEOCORTEX index takes `memory/core`. CORTEX takes `memory/core/entry`: it still counts as core, but its own color group (first in the list, so it wins) paints the entry point red.
 - Project notes: `project/<name>` (lowercase, hyphens); the project list: `project`.
-- HIPPOCAMPUS notes: `hippocampus`, left uncolored in the graph because they aren't memory yet.
+- HIPPOCAMPUS notes: `hippocampus`, purple in the graph.
 - PREFRONTAL notes other than projects: `memory/personal`, also left uncolored: a separate personal layer.
-- A sixth graph color can't be told apart from the other five in both themes, so new areas join an existing lobe.
+- Graph colors are checked as a set (light and dark themes, color-blind vision) before one is added, so new areas join an existing lobe.
 
 ## Check the brain
 On "check the brain", audit and report; change nothing during the audit (fixes go through SYNAPSE).

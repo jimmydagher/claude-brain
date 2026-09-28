@@ -8,6 +8,13 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
+      "query": "tag:#memory/core/entry",
+      "color": {
+        "a": 1,
+        "rgb": 14895432
+      }
+    },
+    {
       "query": "tag:#memory/core",
       "color": {
         "a": 1,
@@ -39,7 +46,7 @@
       "query": "tag:#project",
       "color": {
         "a": 1,
-        "rgb": 14895432
+        "rgb": 11547546
       }
     },
     {
