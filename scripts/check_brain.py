@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts", "docs"}
+SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts", "docs", "meta"}
 UNTAGGED_OK = {"README.md"}
 HIPPOCAMPUS = ("HIPPOCAMPUS/SYNAPSE.md", "HIPPOCAMPUS/ENGRAM.md")
 PERSONAL = ("prefrontal/",)

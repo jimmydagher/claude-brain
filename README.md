@@ -4,6 +4,10 @@ tags:
 ---
 # claude-brain
 
+## 🆕VERSION 0.1.0 📅 2026-10-04
+
+What changed in each version: [meta/CHANGELOG.md](meta/CHANGELOG.md).
+
 A second brain for AI harnesses: an Obsidian vault of short Markdown instructions that Claude (or any MCP client) reads before it works. It adds guardrails, cuts filler and wasted tokens, and reduces re-prompting.
 
 ## How it works
@@ -107,6 +111,17 @@ Your harness needs to know where the vault lives. Pick one:
 ## Checks
 
 `scripts/check_brain.py` (Python, standard library only) runs the deterministic checks: dead links, ambiguous bare-name links, tracked notes linking to personal notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs, plus slop-list hits, repeated lines, links that leave the tree and orphan notes as warnings. `.claude/settings.json` runs it after every file Claude Code writes in this vault; delete that file to turn the hook off. The checker's own tests run with `python -m unittest discover -s scripts -p "test_*.py"`.
+
+## Releases
+
+`meta/VERSION` holds the current version and `meta/CHANGELOG.md` the history; `meta/TODO.md` tracks outstanding work. Every commit to `main` runs the release hooks in `scripts/git/`: a change bumps the PATCH version, promotes the changelog's `🚧 Unreleased` notes, closes the `TODO #n` items they cite and sets the commit message to `VERSION x.y.z`. A docs-only commit (patterns in `scripts/git/release.json`) keeps the version and is labeled `VERSION x.y.z+k`. A commit with nothing under Unreleased is refused. For a MINOR or MAJOR bump, write the new number into `meta/VERSION` and stage it before committing.
+
+After cloning, run once in the repo root (needs Python 3.9+ on `PATH`):
+
+```bash
+git config core.hooksPath scripts/git
+git config commit.template scripts/git/commit-template
+```
 
 ## Make it yours
 

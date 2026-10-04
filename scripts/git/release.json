@@ -1,0 +1,3 @@
+{
+  "docs_patterns": ["README.md", ".claude/CLAUDE.md", "meta/*.md", "docs/*"]
+}
