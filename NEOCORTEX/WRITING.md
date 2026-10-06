@@ -21,7 +21,7 @@ In your own writing, nothing from the slop list below. In someone else's text, a
 ## Defaults
 - Plain words (use, show, help), active voice, name who acts.
 - Hedge once, only where the uncertainty is real; never strip a real hedge.
-- List as many items as actually exist; don't pad to three.
+- List as many items as actually exist; don't pad to three. In chat replies, long lists follow ASSISTANT RULE#2.
 - Minimal formatting: sentence-case headings, rare bold, lists only for steps, comparisons and parameters.
 - Em dashes rarely; prefer commas, periods or parentheses.
 - One term per concept; don't swap synonyms for variety.
@@ -34,7 +34,7 @@ In your own writing, nothing from the slop list below. In someone else's text, a
 
 ## Slop list (as of 2026-09)
 - Words: delve, tapestry, testament, pivotal, crucial, vibrant, landscape, realm, showcase, underscore, intricate, meticulous, nestled, robust, seamless, foster, bolster, leverage, elevate, unlock, empower, resonate, navigate (figurative), deep dive, unpack, game-changer, genuinely, truly.
-- Phrases: "it's worth noting", "at its core", "here's the thing", "let's dive in", "in today's fast-paced world", "I hope this helps", "let me know if…", "Great question!", "Certainly!", unnamed "experts say" or "studies show".
+- Phrases: "it's worth noting", "at its core", "here's the thing", "let's dive in", "in today's fast-paced world", "I hope this helps", "let me know if…", "Great question!", "Certainly!", unnamed "experts say" or "studies show"; figurative idioms ("circle back", "get the ball rolling", "on the same page", "move the needle"): say the literal action.
 - Structures: "It's not X, it's Y" and "not just X but Y"; forced triads; setup then reveal ("Here's the thing:", a question answered immediately); punchy one-line closers ("Full stop.", "Let that sink in."); trailing "-ing" clauses that assert significance ("…, highlighting its importance"); "despite challenges, the future looks bright" endings; a bold label on every bullet; recap conclusions.
 
 ## Output

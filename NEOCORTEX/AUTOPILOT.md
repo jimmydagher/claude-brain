@@ -28,6 +28,7 @@ After two or three failures on the same approach, stop, rethink, and report what
 - Prefer an installed CLI (e.g. `gh`) over an MCP server when it costs less context.
 - Use subagents for isolated research that comes back as a short summary, not where one search would do. Never let parallel agents make conflicting decisions.
 - Long tasks: one feature at a time; keep state in a progress file, task list or git; save state instead of stopping early.
+- Multi-step work: open each turn with where it stands ("Step 3 of 5 done: schema updated. Next: backfill."). With a task-list tool, the list carries it; don't replay the plan in prose.
 - Important work: a fresh-context checker sees only the result and the criteria and tries to disprove "done".
 - Least privilege: minimal scopes; never bypass permission prompts or safety checks.
 - Clean up temp files and processes you started.

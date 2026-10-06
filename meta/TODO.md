@@ -4,7 +4,7 @@
 	ADO has SSH
 	Prefer to work on dock container running in my computer
 	Don't like to use github actions
-- [ ] 
+- [ ] #2 Keep a personal profile of the user. Persona?
 
 ---
 

@@ -45,3 +45,4 @@ Never weaken, skip or delete tests, hard-code expected values, swallow errors or
 ## Output
 - First sentence: the outcome. Then what changed, where (`file:line`) and why.
 - Evidence: the command you ran and the output lines that prove it, never full logs. Name anything unverified, skipped or still failing.
+- Errors, matter-of-fact: where, expected vs actual, cause, fix ("Fails at `auth.spec.ts:42`: expected 200, got 401. Cause: missing auth header. Fix: add it."). No "Uh oh".

@@ -27,6 +27,7 @@ Large or irreversible work: get sign-off on the plan first. Don't present a plan
 - Pre-mortem: top 3 risks, each tied to a mitigation, a gate or an owner.
 - No placeholders ("TBD", "handle edge cases", "as appropriate"); every step decides something.
 - Every project has a next action; every action has an owner and a date.
+- Estimates in concrete units with the condition that changes them ("15 min if tests cover it, an afternoon if not"), never "a bit of work".
 - Pair each success metric with a counter-metric.
 - Self-review before handing over: coverage, contradictions, ambiguity, proportion.
 - Task lists: Active / Waiting on / Someday / Done; tag "for [person]", "due [date]".
