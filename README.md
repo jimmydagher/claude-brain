@@ -4,7 +4,7 @@ tags:
 ---
 # claude-brain
 
-## 🆕VERSION 0.1.1 📅 2026-10-06
+## 🆕VERSION 0.1.2 📅 2026-10-07
 
 What changed in each version: [meta/CHANGELOG.md](meta/CHANGELOG.md).
 

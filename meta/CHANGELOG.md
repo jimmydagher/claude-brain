@@ -16,7 +16,21 @@ All notable changes, newest first. See `VERSION` for the current release.
 ### Bug/Issues/Fixes
 (none)
 
-## 🆕VERSION 0.1.1 📅 2026-10-06
+## 🆕VERSION 0.1.2 📅 2026-10-07
+
+### Added or New Features
+(none)
+
+### Removed
+(none)
+
+### Changed
+- Changes were applied to CODING.md
+
+### Bug/Issues/Fixes
+(none)
+
+## 🟧VERSION 0.1.1 📅 2026-10-06
 
 ### Added or New Features
 (none)
