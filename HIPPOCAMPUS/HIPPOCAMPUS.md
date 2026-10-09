@@ -10,6 +10,7 @@ tags:
 - Either file missing (a fresh clone): create it from the template below, then continue.
 - Both files link up to this guide; ENGRAM also links NEOCORTEX, where committed memory lands.
 - IDs are `HX0001`, `HX0002`…; SYNAPSE's `Next ID` stays above every ID used in either file.
+- An entry that undoes a commit says `corrects: HX0012` in its proposed change; committing it restores the old values from ENGRAM.
 
 ## SYNAPSE.md template
 ```markdown
@@ -22,7 +23,7 @@ tags:
 Next ID: HX0001
 
 ## Pending
-<!-- Format: - [ ] HX0001 · YYYY-MM-DD · → NEOCORTEX/FILE › Section or → PREFRONTAL/FILE#Section · proposed change · why · source (correction, preference, research) -->
+<!-- Format: - [ ] HX0001 · YYYY-MM-DD · → NEOCORTEX/<AREA>/FILE › Section or → PREFRONTAL/<AREA>/FILE#Section · proposed change · why · source (correction, preference, research) -->
 ```
 
 ## ENGRAM.md template
@@ -34,6 +35,6 @@ tags:
 > Trail of evaluated SYNAPSE entries, newest first: `[x]` committed, `[-]` rejected so it isn't proposed again. Search it; don't load it whole. Guide: [[HIPPOCAMPUS/HIPPOCAMPUS|HIPPOCAMPUS]] · Queue: [[HIPPOCAMPUS/SYNAPSE|SYNAPSE]] · Committed entries land in [[NEOCORTEX/NEOCORTEX|NEOCORTEX]] (personal ones in `PREFRONTAL`)
 
 ## Trail
-<!-- Committed: - [x] HX0001 · proposed YYYY-MM-DD · committed YYYY-MM-DD · landed in NEOCORTEX/FILE › Section or PREFRONTAL/FILE#Section · summary -->
+<!-- Committed: - [x] HX0001 · proposed YYYY-MM-DD · committed YYYY-MM-DD · landed in NEOCORTEX/<AREA>/FILE › Section or PREFRONTAL/<AREA>/FILE#Section · old → new -->
 <!-- Rejected: - [-] HX0002 · proposed YYYY-MM-DD · rejected YYYY-MM-DD · summary · reason -->
 ```

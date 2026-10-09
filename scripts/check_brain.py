@@ -6,9 +6,10 @@ python scripts/check_brain.py FILE...   only these files
 python scripts/check_brain.py --hook    Claude Code PostToolUse hook: checks the file just written
 
 Errors: dead wikilinks and heading links, ambiguous bare-name links, tracked notes linking to personal notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
-Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, links that leave the tree, orphan notes and personal sections over the size cap.
+Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, links that leave the tree, orphan notes, personal sections over the size cap, two notes on one subject (the same name in one scope), knowledge notes without sources, and active project hubs not updated for a month.
 Exit: 0 no errors, 1 errors, 2 errors in --hook mode (Claude Code shows them to Claude).
 """
+import datetime
 import json
 import re
 import sys
@@ -18,8 +19,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIRS = {".obsidian", ".trash", ".git", ".claude", ".remember", "scripts", "docs", "meta"}
 UNTAGGED_OK = {"README.md"}
 HIPPOCAMPUS = ("HIPPOCAMPUS/SYNAPSE.md", "HIPPOCAMPUS/ENGRAM.md")
-PERSONAL = ("prefrontal/",)
-PERSONAL_GUIDES = {"prefrontal/prefrontal"}
+# Notes git doesn't track (.gitignore): the personal layer, shared knowledge notes and project hubs; only their guides are tracked.
+UNTRACKED = ("prefrontal/", "neocortex/knowledge/", "neocortex/projects/")
+GUIDES = {"prefrontal/prefrontal", "neocortex/knowledge/knowledge", "neocortex/projects/projects"}
+PERSONAL_ROOT = "prefrontal/"
+MOUNT = re.compile(r"prefrontal/([^/]+)/")  # a user's folder, which the brain shows them as plain PREFRONTAL/
 TOP = "cortex"  # the note every folder index hangs from
 ROOTS = {TOP, "readme"}
 # Links allowed to leave the tree on purpose: ENGRAM shows where committed memory lands.
@@ -31,6 +35,10 @@ SECTION_CAP = 150
 CODE_SPAN = re.compile(r"`[^`]*`")
 QUOTED = re.compile("\"[^\"]*\"|“[^”]*”")
 RESIDUE = re.compile(r"oaicite|contentReference\[|utm_source=chatgpt\.com|\[cite:\s*\d+\]|\[Your Name\]|lorem ipsum", re.I)
+STALE_DAYS = 30
+PROJECT = re.compile(r"(?:neocortex|prefrontal/[^/]+)/projects/([^/]+)/")  # a note inside one project's folder
+HUB_STATUS = re.compile(r"Status:\s*active\b", re.I)
+HUB_UPDATED = re.compile(r"Updated:\s*(\d{4}-\d{2}-\d{2})")
 HX = re.compile(r"\bHX(\d{4})\b")
 ENTRY = re.compile(r"\s*- \[[ xX-]\] HX(\d{4})\b")
 
@@ -43,9 +51,22 @@ def rel(path):
     return path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
 
 
-def is_personal(key):
-    """Whether a lowercase vault key (path without .md) is an untracked personal note."""
-    return key.startswith(PERSONAL) and key not in PERSONAL_GUIDES
+def is_untracked(key):
+    """Whether a lowercase vault key (path without .md) is a note git doesn't track."""
+    return key.startswith(UNTRACKED) and key not in GUIDES
+
+
+def resolve_path(key, own, paths):
+    """A full-path link target as a vault key: as written, or, from inside a user's personal folder,
+    the way the brain shows it to them (`PREFRONTAL/INSTRUCTIONS/X` means `PREFRONTAL/<user>/INSTRUCTIONS/X`)."""
+    if key in paths:
+        return key
+    mount = MOUNT.match(own)
+    if mount and key.startswith(PERSONAL_ROOT):
+        mapped = mount.group(0) + key[len(PERSONAL_ROOT):]
+        if mapped in paths:
+            return mapped
+    return None
 
 
 def parent(key, paths):
@@ -95,7 +116,7 @@ def body(lines):
 def slop_pattern():
     """Build a matcher from WRITING.md's slop list, so the list lives in one place."""
     words, phrases = [], []
-    writing = ROOT / "NEOCORTEX" / "WRITING.md"
+    writing = ROOT / "NEOCORTEX" / "INSTRUCTIONS" / "WRITING.md"
     if writing.exists():
         for line in writing.read_text(encoding="utf-8").splitlines():
             if line.startswith("- Words:"):
@@ -128,7 +149,7 @@ def check_note(path, slop, index, errors, warnings, linked):
         errors.append(f"{name}:1: missing tags frontmatter")
     paths, names, heads = index
     own = name[:-3].lower()
-    tracked = not is_personal(own) and name not in HIPPOCAMPUS
+    tracked = not is_untracked(own) and name not in HIPPOCAMPUS
     prev_plain = False
     for n, text, section in body(lines):
         plain = bool(text.strip()) and not BLOCK.match(text)
@@ -137,14 +158,18 @@ def check_note(path, slop, index, errors, warnings, linked):
         prev_plain = plain
         for target, heading in LINK.findall(text):
             key = target.strip().lower().removesuffix(".md")
-            found = ([key] if key in paths else []) if "/" in key else names.get(key, [])
+            if "/" in key:
+                resolved = resolve_path(key, own, paths)
+                found = [resolved] if resolved else []
+            else:
+                found = names.get(key, [])
             if not found:
                 errors.append(f"{name}:{n}: dead link [[{target.strip()}]]")
                 continue
             if "/" not in key and len(found) > 1:
                 errors.append(f"{name}:{n}: ambiguous link [[{target.strip()}]] matches {', '.join(sorted(found))}: use the full path")
-            if tracked and any(is_personal(f) for f in found):
-                errors.append(f"{name}:{n}: tracked note links to personal note [[{target.strip()}]]: personal notes link up to PREFRONTAL instead")
+            if tracked and any(is_untracked(f) for f in found):
+                errors.append(f"{name}:{n}: tracked note links to untracked note [[{target.strip()}]]: untracked notes link up to their guide instead")
             if len(found) == 1 and found[0] != own and not in_tree(own, found[0], paths):
                 warnings.append(f"{name}:{n}: link [[{target.strip()}]] leaves the tree: write it as a plain name in backticks")
             others = [f for f in found if f != own]
@@ -185,7 +210,8 @@ def check_ids(errors):
 
 def check_repeats(warnings):
     seen = {}
-    for path in [ROOT / "CORTEX.md", *sorted((ROOT / "NEOCORTEX").glob("*.md"))]:
+    shared = sorted(p for p in (ROOT / "NEOCORTEX").rglob("*.md") if not is_untracked(rel(p)[:-3].lower()))
+    for path in [ROOT / "CORTEX.md", *shared]:
         for n, text, _ in body(path.read_text(encoding="utf-8").splitlines()):
             key = re.sub(r"\s+", " ", re.sub(r"^[\s>*+-]*(\d+\.\s*)?", "", text)).strip().lower()
             if len(key.split()) >= 12:
@@ -204,9 +230,10 @@ def check_orphans(files, linked, warnings):
 
 
 def check_prefrontal(warnings):
-    """Warn when a PREFRONTAL preference section outgrows the cap: it splits into its own file."""
-    for path in sorted((ROOT / "PREFRONTAL").glob("*.md")):
-        if path.name == "PREFRONTAL.md":
+    """Warn when a personal instruction section outgrows the cap: it splits into its own file."""
+    personal = ROOT / "PREFRONTAL"
+    for path in sorted([*personal.glob("INSTRUCTIONS/*.md"), *personal.glob("*/INSTRUCTIONS/*.md")]):
+        if path.name == "INSTRUCTIONS.md":
             continue
         title, count = None, 0
         for line in path.read_text(encoding="utf-8").splitlines() + ["## "]:
@@ -216,6 +243,47 @@ def check_prefrontal(warnings):
                 title, count = line[3:].strip(), 0
             else:
                 count += 1
+
+
+def is_index(key):
+    """Whether a note is its folder's index (named like the folder), which every folder repeats by design."""
+    parts = key.split("/")
+    return len(parts) > 1 and parts[-1] == parts[-2]
+
+
+def is_knowledge(key):
+    """A knowledge note, shared or personal (not a folder index)."""
+    return (key.startswith("neocortex/knowledge/") or re.match(r"prefrontal/([^/]+/)?knowledge/", key)) and not is_index(key)
+
+
+def check_health(files, warnings, today=None):
+    """Warn on two notes about one subject, knowledge notes without sources, and stale active project hubs."""
+    today = today or datetime.date.today()
+    scopes = {}
+    for path in files:
+        key = rel(path)[:-3].lower()
+        if is_index(key) or key in ROOTS:
+            continue
+        project = PROJECT.match(key)
+        scopes.setdefault((project.group(0) if project else "", key.rsplit("/", 1)[-1]), []).append(rel(path))
+    for (scope, _), places in sorted(scopes.items()):
+        if len(places) > 1:
+            where = f"in {scope.rstrip('/')}" if scope else "across the brain"
+            warnings.append(f"{places[0]}: same note name {where} as {', '.join(places[1:])}: one subject, one note")
+    for path in files:
+        key = rel(path)[:-3].lower()
+        lines = path.read_text(encoding="utf-8").splitlines()
+        if is_knowledge(key) and not any(line.startswith("sources:") for line in frontmatter(lines) or []):
+            warnings.append(f"{rel(path)}: knowledge note without sources in its frontmatter")
+        project = PROJECT.match(key)
+        if project and key.startswith("neocortex/") and key == project.group(0) + project.group(1):
+            header = next((line for line in lines if HUB_STATUS.search(line)), None)
+            if header:
+                updated = HUB_UPDATED.search(header)
+                age = (today - datetime.date.fromisoformat(updated.group(1))).days if updated else None
+                if age is None or age > STALE_DAYS:
+                    since = f"for {age} days" if age is not None else "(no Updated date)"
+                    warnings.append(f"{rel(path)}: active project hub not updated {since}: refresh ## Now or change its Status")
 
 
 def main():
@@ -244,6 +312,7 @@ def main():
         check_repeats(warnings)
         check_orphans(files, linked, warnings)
         check_prefrontal(warnings)
+        check_health(files, warnings)
     out = sys.stderr if hook else sys.stdout
     for line in errors + warnings:
         print(line, file=out)

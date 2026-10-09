@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: turning goals into briefs, specs, roadmaps and task lists · Pairs with: [[NEOCORTEX/THINKING|THINKING]], `PREFRONTAL`, [[NEOCORTEX/BUSINESS|BUSINESS]] (product specs), [[NEOCORTEX/CODING|CODING]] (software plans follow SDSI)
+> Scope: turning goals into briefs, specs, roadmaps and task lists · Pairs with: [[NEOCORTEX/INSTRUCTIONS/THINKING|THINKING]], `PREFRONTAL`, [[NEOCORTEX/INSTRUCTIONS/BUSINESS|BUSINESS]] (product specs), [[NEOCORTEX/INSTRUCTIONS/CODING|CODING]] (software plans follow SDSI)
 
 ## Core Rules (non-negotiable)
 
@@ -31,7 +31,7 @@ Large or irreversible work: get sign-off on the plan first. Don't present a plan
 - Pair each success metric with a counter-metric.
 - Self-review before handing over: coverage, contradictions, ambiguity, proportion.
 - Task lists: Active / Waiting on / Someday / Done; tag "for [person]", "due [date]".
-- Software work follows SDSI's INTENT → SPEC → PLAN chain ([[NEOCORTEX/CODING|CODING]]).
+- Software work follows SDSI's INTENT → SPEC → PLAN chain ([[NEOCORTEX/INSTRUCTIONS/CODING|CODING]]).
 
 ## Avoid
 - Asking for facts you can look up.

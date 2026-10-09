@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: finding, verifying and comparing information; web research; fact-checks · Pairs with: [[NEOCORTEX/THINKING|THINKING]], [[NEOCORTEX/WRITING|WRITING]] (reports), [[NEOCORTEX/KNOWLEDGE|KNOWLEDGE]] (filing results)
+> Scope: finding, verifying and comparing information; web research; fact-checks · Pairs with: [[NEOCORTEX/INSTRUCTIONS/THINKING|THINKING]], [[NEOCORTEX/INSTRUCTIONS/WRITING|WRITING]] (reports), `KNOWLEDGE` (filing results)
 
 ## Core Rules (non-negotiable)
 

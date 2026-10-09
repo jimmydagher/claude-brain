@@ -16,7 +16,21 @@ All notable changes, newest first. See `VERSION` for the current release.
 ### Bug/Issues/Fixes
 (none)
 
-## 🆕VERSION 0.1.3 📅 2026-10-09
+## 🆕VERSION 0.1.4 📅 2026-10-09
+
+### Added or New Features
+(none)
+
+### Removed
+- `docs/superpowers/`: the brain-layout plan and design from 2026-09-27, now done and no longer needed.
+
+### Changed
+(none)
+
+### Bug/Issues/Fixes
+- Ships the vault changes listed under 0.1.3 that its commit left out (only the area-file moves went in): `CORTEX.md`, the area files' new links, the INSTRUCTIONS index, the NEOCORTEX hub, the KNOWLEDGE and PROJECTS guides, PREFRONTAL, HIPPOCAMPUS, README, `.gitignore`, the graph colors and `check_brain.py` with its tests.
+
+## 🟩VERSION 0.1.3 📅 2026-10-09
 
 ### Added or New Features
 - NEOCORTEX is now a hub over three shared areas: `INSTRUCTIONS/` (the 16 area files and their routing index), `KNOWLEDGE/` (shared reference notes, searched on demand; guide: `NEOCORTEX/KNOWLEDGE/KNOWLEDGE.md`) and `PROJECTS/` (shared project hubs in lowercase folders such as `life-dashboard/`, and the `HUB.md` list; guide and hub template: `NEOCORTEX/PROJECTS/PROJECTS.md`). Knowledge notes and project hubs are gitignored; only the guides are tracked.

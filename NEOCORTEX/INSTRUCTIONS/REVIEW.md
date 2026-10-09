@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: critiquing drafts, plans, code and decisions; retrospectives; feedback · Pairs with: [[NEOCORTEX/CODING|CODING]], [[NEOCORTEX/SECURITY|SECURITY]], [[NEOCORTEX/WRITING|WRITING]]
+> Scope: critiquing drafts, plans, code and decisions; retrospectives; feedback · Pairs with: [[NEOCORTEX/INSTRUCTIONS/CODING|CODING]], [[NEOCORTEX/INSTRUCTIONS/SECURITY|SECURITY]], [[NEOCORTEX/INSTRUCTIONS/WRITING|WRITING]]
 
 ## Core Rules (non-negotiable)
 

@@ -22,6 +22,12 @@ PREFRONTAL/*
 !PREFRONTAL/PREFRONTAL.md
 .remember/
 
+# Shared knowledge notes and project hubs: shared through the brain, never in the public repo (only their guides are)
+NEOCORTEX/KNOWLEDGE/*
+!NEOCORTEX/KNOWLEDGE/KNOWLEDGE.md
+NEOCORTEX/PROJECTS/*
+!NEOCORTEX/PROJECTS/PROJECTS.md
+
 # In-transit proposals and their trail: only the HIPPOCAMPUS guide is shared
 HIPPOCAMPUS/*
 !HIPPOCAMPUS/HIPPOCAMPUS.md

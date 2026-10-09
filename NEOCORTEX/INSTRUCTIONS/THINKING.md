@@ -2,7 +2,7 @@
 tags:
   - memory/thinking
 ---
-> Scope: decisions, trade-offs, judgment calls, "should I…" questions · Pairs with: [[NEOCORTEX/PLANNING|PLANNING]], [[NEOCORTEX/RESEARCH|RESEARCH]], [[NEOCORTEX/VISUAL|VISUAL]] (diagrams)
+> Scope: decisions, trade-offs, judgment calls, "should I…" questions · Pairs with: [[NEOCORTEX/INSTRUCTIONS/PLANNING|PLANNING]], [[NEOCORTEX/INSTRUCTIONS/RESEARCH|RESEARCH]], [[NEOCORTEX/INSTRUCTIONS/VISUAL|VISUAL]] (diagrams)
 
 ## Core Rules (non-negotiable)
 

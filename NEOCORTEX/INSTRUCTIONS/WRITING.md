@@ -2,7 +2,7 @@
 tags:
   - memory/communication
 ---
-> Scope: emails, docs, posts, messages, editing prose · Pairs with: [[NEOCORTEX/BUSINESS|BUSINESS]] (marketing copy), [[NEOCORTEX/LANGUAGE|LANGUAGE]], [[NEOCORTEX/REVIEW|REVIEW]], [[NEOCORTEX/MECHANICS|MECHANICS]] (.md files)
+> Scope: emails, docs, posts, messages, editing prose, summaries and extracts · Pairs with: [[NEOCORTEX/INSTRUCTIONS/RESEARCH|RESEARCH]] (sources), [[NEOCORTEX/INSTRUCTIONS/BUSINESS|BUSINESS]] (marketing copy), [[NEOCORTEX/INSTRUCTIONS/LANGUAGE|LANGUAGE]], [[NEOCORTEX/INSTRUCTIONS/REVIEW|REVIEW]], [[NEOCORTEX/INSTRUCTIONS/MECHANICS|MECHANICS]] (.md files)
 
 ## Core Rules (non-negotiable)
 
@@ -18,6 +18,9 @@ Names, numbers and examples instead of abstractions, but never invent them: cut 
 ### RULE#4 No slop
 In your own writing, nothing from the slop list below. In someone else's text, a hit only marks a passage to test; never call text AI-written.
 
+### RULE#5 Faithful to the source
+Summaries and extracts summarize; they don't embellish or interpret. Quotes are verbatim with attribution; never paraphrase inside quotation marks.
+
 ## Defaults
 - Plain words (use, show, help), active voice, name who acts.
 - Hedge once, only where the uncertainty is real; never strip a real hedge.
@@ -29,14 +32,17 @@ In your own writing, nothing from the slop list below. In someone else's text, a
 - Don't over-correct: formal prose, correct grammar and real three-item lists are fine. When editing someone's text, keep their voice.
 - Test before you cut or keep: deletion (what's lost if it goes?), inversion (if nobody would argue the opposite, it says nothing), attribution (which source backs this exact claim?).
 - Rewrites: diagnose first, repair in a second pass; add no new claims.
+- Summaries make sense without the source. Compress by densifying: keep the length, add missing key entities, cut filler (chain of density).
 - Creative writing may use voice and imagery; still no clichés.
 - File deliverables (.docx, .pdf): use the matching skill if the harness has one.
 
 ## Slop list (as of 2026-09)
 - Words: delve, tapestry, testament, pivotal, crucial, vibrant, landscape, realm, showcase, underscore, intricate, meticulous, nestled, robust, seamless, foster, bolster, leverage, elevate, unlock, empower, resonate, navigate (figurative), deep dive, unpack, game-changer, genuinely, truly.
 - Phrases: "it's worth noting", "at its core", "here's the thing", "let's dive in", "in today's fast-paced world", "I hope this helps", "let me know if…", "Great question!", "Certainly!", unnamed "experts say" or "studies show"; figurative idioms ("circle back", "get the ball rolling", "on the same page", "move the needle"): say the literal action.
-- Structures: "It's not X, it's Y" and "not just X but Y"; forced triads; setup then reveal ("Here's the thing:", a question answered immediately); punchy one-line closers ("Full stop.", "Let that sink in."); trailing "-ing" clauses that assert significance ("…, highlighting its importance"); "despite challenges, the future looks bright" endings; a bold label on every bullet; recap conclusions.
+- Structures: "It's not X, it's Y" and "not just X but Y"; forced triads; setup then reveal ("Here's the thing:", a question answered immediately); punchy one-line closers ("Full stop.", "Let that sink in."); trailing "-ing" clauses that assert significance ("…, highlighting its importance"); "despite challenges, the future looks bright" endings; a bold label on every bullet; recap conclusions; meta-filler ("This article discusses…").
 
 ## Output
 - Email or message: the subject states the purpose (ACTION / INFO / DECISION); the first line is the bottom line or the ask; then context; end with next step, owner and date. Length: chat < email < doc.
 - Edits: return the revised text; add a change note of up to 3 bullets only for substantive changes.
+- Summary: one sentence (25 words max) that carries the point → main points (up to 10, 16 words each max) → takeaways (up to 5). Scale to the source's length; no empty sections.
+- Extraction: ideas, insights, quotes, facts, references, recommendations; only the sections that have content. Filing the result: `KNOWLEDGE`.
