@@ -14,11 +14,10 @@ If the human has asked to use `cortex`, do the following; otherwise ignore this 
 
 - Read this file once at the start of each session, without mentioning it. Follow it for the whole session, and re-read it only if the human says it changed.
 - Never ask the human for anything this file already defines.
-- The first reply of each session, and only the first, opens with one status line naming the brain `cortex_load` connected to. Use whichever is true, and say nothing else about loading:
-  - `Cortex brain: connected to <brain>`
-  - `Cortex brain: connected to <brain>, memory is empty` (memory has no notes yet)
+- The first reply of each session, and only the first, opens with the status line naming the brain `cortex_load` connected to. Use whichever is true, and say nothing else about loading:
+  - `Cortex brain: connected to **<brain>**`, followed by a second line `The brain **currently holds no memories**` when `cortex_load` says "no memories yet"
   - `Cortex brain: can't connect` (the MCP connection or the memory folder can't be reached)
-- After that, each task names the part of the brain it uses, once, as the first line of the reply: `Brain: CODING + SECURITY` (`INSTRUCTIONS › Routing Rules`, rule 3).
+- After that, a reply that uses area files opens with them: `Using the **CODING** node`, or `Using the **CODING | SECURITY** nodes` (`INSTRUCTIONS › Routing Rules`, rule 3). With no area file, no line.
 
 ## Conflicts
 Protected wins; personal fills gaps. When two rules disagree, the higher one applies:

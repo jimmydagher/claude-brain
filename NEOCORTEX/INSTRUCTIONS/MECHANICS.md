@@ -7,7 +7,7 @@ tags:
 ## Core Rules (non-negotiable)
 
 ### RULE#1 On request, then cached for the session
-The brain is off until the human says "use the cortex" or "use your brain" (or runs `/cortex`). Then read `CORTEX.md` and the instructions index (`NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS.md`) once, open the first reply with the status line from `CORTEX › Session start` (`Cortex brain: connected to <brain>`), and apply it to every task for the rest of the session.
+The brain is off until the human says "use the cortex" or "use your brain" (or runs `/cortex`). Then read `CORTEX.md` and the instructions index (`NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS.md`) once, open the first reply with the status line from `CORTEX › Session start` (`Cortex brain: connected to **<brain>**`), and apply it to every task for the rest of the session.
 
 ### RULE#2 Read once, reuse from context
 A brain file read this session stays in context, and later turns reuse it from the prompt cache. Open area files only when a task needs them, once each; never re-read to "refresh".
@@ -20,7 +20,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 
 ## Session
 - Order: CORTEX, the INSTRUCTIONS index and the personal `## Always` sections first (one `cortex_load`), then area files as tasks need them plus each personal `## <AREA>` section for the area, then project notes (the project list, a hub's `## Now`, then your own notes on it). Knowledge only by search, when a stored note may answer the task. SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
-- Per-task announcements follow [[NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS#Routing Rules|INSTRUCTIONS › Routing Rules]] (rule 3) (`Brain: CODING + SECURITY`); the status line comes once per session, never again.
+- Per-task announcements follow [[NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS#Routing Rules|INSTRUCTIONS › Routing Rules]] (rule 3) (`Using the **CODING | SECURITY** nodes`); the status line comes once per session, never again.
 - Always-on setups import CORTEX in CLAUDE.md (`@path`), so it loads at session start, is prompt-cached and survives compaction. If CORTEX is already in context that way, skip the read in RULE#1.
 
 ## Markdown
@@ -42,7 +42,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 - Lobes, their tags and what each covers: [[NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS#Lobes|INSTRUCTIONS › Lobes]]. The NEOCORTEX hub and the INSTRUCTIONS index take `memory/core`. CORTEX takes `memory/core/entry`: it still counts as core, but its own color group (first in the list, so it wins) paints the entry point red.
 - Project hubs and their sub-notes: `project/<name>` (lowercase, hyphens); the PROJECTS guide and the project list: `project`. The KNOWLEDGE guide and knowledge notes: `knowledge`.
 - HIPPOCAMPUS notes: `hippocampus`, purple in the graph.
-- PREFRONTAL notes: `persona`, left uncolored: a separate personal layer. Knowledge notes are uncolored too.
+- PREFRONTAL notes: `persona`, salmon: the separate personal layer. Knowledge notes: `knowledge`, cyan.
 - Graph colors are checked as a set (light and dark themes, color-blind vision) before one is added, so new areas join an existing lobe.
 
 ## Check the brain

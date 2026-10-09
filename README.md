@@ -84,7 +84,7 @@ Obsidian keeps graph settings in memory and writes them back to `graph.json` whe
 
 ## Turn it on
 
-The brain is off by default. Say **"use the cortex"** or **"use your brain"** and the AI reads CORTEX once, opens its reply with `Cortex brain: connected to <brain>`, and routes every task for the rest of the session.
+The brain is off by default. Say **"use the cortex"** or **"use your brain"** and the AI reads CORTEX once, opens its reply with `Cortex brain: connected to **<brain>**`, and routes every task for the rest of the session.
 
 Your harness needs to know where the vault lives. Pick one:
 

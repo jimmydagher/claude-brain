@@ -50,10 +50,24 @@
       }
     },
     {
-      "query": "tag:#hippocampus  ",
+      "query": "tag:#hippocampus",
       "color": {
         "a": 1,
         "rgb": 5984992
+      }
+    },
+    {
+      "query": "tag:#persona",
+      "color": {
+        "a": 1,
+        "rgb": 16416882
+      }
+    },
+    {
+      "query": "tag:#knowledge",
+      "color": {
+        "a": 1,
+        "rgb": 41924
       }
     }
   ],

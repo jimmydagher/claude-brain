@@ -16,7 +16,23 @@ All notable changes, newest first. See `VERSION` for the current release.
 ### Bug/Issues/Fixes
 (none)
 
-## 🆕VERSION 0.1.4 📅 2026-10-09
+## 🆕VERSION 0.1.5 📅 2026-10-09
+
+### Added or New Features
+(none)
+
+### Removed
+(none)
+
+### Changed
+- The status line names the brain in bold and adds "The brain **currently holds no memories**" when Cortex says so; each reply that uses area files opens with `Using the **CODING** node` (several: `**CODING | SECURITY** nodes`) instead of `Brain: CODING + SECURITY`, and has no line when none applies.
+- Release chain updated to SDSI 1.3.15: `scripts/git/pre-commit` and `scripts/python/release.py` re-copied from the plugin. A commit with an empty Unreleased is no longer refused; the hook writes one `_(from the diff)_` bullet per staged file instead (`"auto_notes": false` in `scripts/git/release.json` restores the refusal). Operator: nothing to do. `release.py` was still the 1.3.8 copy.
+- `.claude/rules/sdsi.md` regenerated from SDSI 1.3.15 (was 1.3.8); it gains the versioning rule to stage a whole change or none of it.
+
+### Bug/Issues/Fixes
+(none)
+
+## 🟦VERSION 0.1.4 📅 2026-10-09
 
 ### Added or New Features
 (none)
