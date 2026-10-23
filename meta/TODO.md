@@ -1,10 +1,14 @@
 # CLAUDE-BRAIN
 
-- [ ] #1 Personal Environment preferences
+- [ ] #1 Add personal environment preferences
+  Personal Environment preferences
 	ADO has SSH
 	Prefer to work on dock container running in my computer
 	Don't like to use github actions
-- [ ] #2 Keep a personal profile of the user. Persona?
+- [ ] #2 Keep a personal user profile
+  Keep a personal profile of the user. Persona?
+- [ ] #3 Learn from the Caveman skill
+  Check Caveman and learn from the skill to enhance the brain.
 
 ---
 

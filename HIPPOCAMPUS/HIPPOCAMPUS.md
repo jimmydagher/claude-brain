@@ -11,6 +11,8 @@ tags:
 - Both files link up to this guide; ENGRAM also links NEOCORTEX, where committed memory lands.
 - IDs are `HX0001`, `HX0002`…; SYNAPSE's `Next ID` stays above every ID used in either file.
 - An entry that undoes a commit says `corrects: HX0012` in its proposed change; committing it restores the old values from ENGRAM.
+- An entry that is the AI's own conclusion, not something the human stated or confirmed, ends its source with `(inferred)` (Cortex: `basis='inferred'`). The review looks harder at those.
+- An entry may remove notes. Through Cortex, they move to the brain's `.trash/` folder, and links still pointing at them are reported.
 
 ## SYNAPSE.md template
 ```markdown
@@ -23,7 +25,7 @@ tags:
 Next ID: HX0001
 
 ## Pending
-<!-- Format: - [ ] HX0001 · YYYY-MM-DD · → NEOCORTEX/<AREA>/FILE › Section or → PREFRONTAL/<AREA>/FILE#Section · proposed change · why · source (correction, preference, research) -->
+<!-- Format: - [ ] HX0001 · YYYY-MM-DD · → NEOCORTEX/<AREA>/FILE › Section or → PREFRONTAL/<AREA>/FILE#Section · proposed change · why · source (correction, preference, research; "(inferred)" when it's the AI's own conclusion) -->
 ```
 
 ## ENGRAM.md template

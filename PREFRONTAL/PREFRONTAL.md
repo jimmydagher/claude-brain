@@ -11,7 +11,7 @@ The personal layer mirrors the shared one in NEOCORTEX, area for area. Each pers
 
 | Mirror | Holds | Loads |
 | --- | --- | --- |
-| `PREFRONTAL/INSTRUCTIONS/` | your preferences and environment facts, one `##` section per area | `## Always` with CORTEX; `## <AREA>` with that area |
+| `PREFRONTAL/INSTRUCTIONS/` | your preferences and environment facts, one `##` section per area; `## Now` for your current focus and short-lived constraints, each ending `[expires:: YYYY-MM-DD]` | `## Always` and `## Now` with CORTEX; `## <AREA>` with that area |
 | `PREFRONTAL/KNOWLEDGE/` | your own notes and drafts | searched on demand |
 | `PREFRONTAL/PROJECTS/<name>/` | your side of a shared project | with that project's hub |
 

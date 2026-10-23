@@ -19,7 +19,7 @@ Re-read CORTEX, the INSTRUCTIONS index and the area files in use when the human 
 One paragraph or list item is one line, however long. Let the editor soft-wrap; never insert line breaks to fit a narrow window.
 
 ## Session
-- Order: CORTEX, the INSTRUCTIONS index and the personal `## Always` sections first (one `cortex_load`), then area files as tasks need them plus each personal `## <AREA>` section for the area, then project notes (the project list, a hub's `## Now`, then your own notes on it). Knowledge only by search, when a stored note may answer the task. SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
+- Order: CORTEX, the INSTRUCTIONS index and the personal `## Always` and `## Now` sections first (one `cortex_load`), then area files as tasks need them plus each personal `## <AREA>` section for the area, then project notes (the project list, a hub's `## Now`, then your own notes on it). Knowledge only by search, when a stored note may answer the task. SYNAPSE only when capturing, reviewing or committing; ENGRAM only by search.
 - Per-task announcements follow [[NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS#Routing Rules|INSTRUCTIONS › Routing Rules]] (rule 3) (`Using the **CODING | SECURITY** nodes`); the status line comes once per session, never again.
 - Always-on setups import CORTEX in CLAUDE.md (`@path`), so it loads at session start, is prompt-cached and survives compaction. If CORTEX is already in context that way, skip the read in RULE#1.
 
@@ -35,6 +35,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 - Files meant for GitHub (README) use relative Markdown links, since GitHub doesn't render wikilinks. External links: `[descriptive text](url)`, never "click here" or a bare URL.
 - Bold sparingly for key terms, never as a fake heading.
 - YAML frontmatter only at the very top; HTML only for comments (`<!-- -->`).
+- A fact that stops being true on a known day ends with `[expires:: YYYY-MM-DD]`. A whole note that expires says `expires: YYYY-MM-DD` in its frontmatter. Once the day has passed, Cortex flags the fact wherever it's read: don't rely on it, and propose updating or removing it.
 - A Markdown file a script writes (e.g. a CHANGELOG rendered by a release script) takes its format from the script: fix the generator, never hand-edit its output, or the next run undoes the edit.
 
 ## Tags
@@ -48,6 +49,7 @@ One paragraph or list item is one line, however long. Let the editor soft-wrap; 
 ## Check the brain
 On "check the brain", audit and report; change nothing during the audit (fixes go through SYNAPSE).
 - Run `python scripts/check_brain.py` when available: dead links and dead heading links, ambiguous links, links that leave the tree, orphan notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs, repeated lines, slop-list hits, two notes with one name in the same scope, knowledge notes without `sources`, active project hubs not updated for 30 days.
+- Through Cortex, `cortex_check` also lists the facts past their `[expires:: …]` date and the layout paths that aren't protected.
 - Then judge what a script can't: one subject spread over notes with different names, rules that contradict each other across files, rules that change no behavior, area files over ~80 lines, PREFRONTAL sections over ~150, SYNAPSE entries pending for more than 30 days.
 
 ## Avoid

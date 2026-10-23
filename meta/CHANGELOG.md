@@ -16,7 +16,23 @@ All notable changes, newest first. See `VERSION` for the current release.
 ### Bug/Issues/Fixes
 (none)
 
-## 🆕VERSION 0.1.5 📅 2026-10-09
+## 🆕VERSION 0.1.6 📅 2026-10-23
+
+### Added or New Features
+- Facts can expire: a line ending `[expires:: YYYY-MM-DD]`, or `expires:` in a note's frontmatter (MECHANICS › Markdown), is flagged by Cortex once past its date.
+- Personal instructions can hold a `## Now` section for current focus, loaded with `## Always` (PREFRONTAL, MECHANICS › Session).
+- SYNAPSE entries that are the AI's own conclusions carry `(inferred)` in their source, and an entry may remove notes (HIPPOCAMPUS).
+
+### Removed
+(none)
+
+### Changed
+(none)
+
+### Bug/Issues/Fixes
+(none)
+
+## 🟪VERSION 0.1.5 📅 2026-10-09
 
 ### Added or New Features
 (none)
