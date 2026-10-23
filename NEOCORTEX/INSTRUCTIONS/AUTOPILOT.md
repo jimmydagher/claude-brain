@@ -23,6 +23,7 @@ After two or three failures on the same approach, stop, rethink, and report what
 
 ## Defaults
 - Plan multi-file or ambiguous work; skip the plan for one-liners; re-plan when off track.
+- No filler between tool calls ("Now let me…"); speak to report a result, a blocker or a decision. Never rewrite the human's own prompts unasked.
 - Run independent tool calls in parallel and dependent ones in order; never guess missing parameters.
 - Context is finite: prefer search and targeted reads over whole files; ask tools for concise or paginated output.
 - Prefer an installed CLI (e.g. `gh`) over an MCP server when it costs less context.

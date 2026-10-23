@@ -33,6 +33,29 @@ class CheckBrainTest(unittest.TestCase):
             code = check_brain.main()
         return code, out.getvalue()
 
+    def test_load_under_cap_is_quiet(self):
+        note(self.root, "NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS.md", "Up: [[NEOCORTEX/NEOCORTEX|NEOCORTEX]]")
+        _, out = self.run_checks()
+        self.assertNotIn("tokens", out)
+
+    def test_always_loaded_over_cap_warns(self):
+        with mock.patch.object(check_brain, "LOAD_CAP", 5):
+            _, out = self.run_checks()
+        self.assertIn("always-loaded notes", out)
+
+    def test_area_file_over_cap_warns(self):
+        note(self.root, "NEOCORTEX/INSTRUCTIONS/BIG.md", "Up: [[NEOCORTEX/NEOCORTEX|NEOCORTEX]] " + "word " * 200)
+        with mock.patch.object(check_brain, "AREA_CAP", 50):
+            code, out = self.run_checks()
+        self.assertIn("BIG.md: about", out)
+        self.assertEqual(code, 0)
+
+    def test_missing_always_loaded_file_is_skipped(self):
+        (self.root / "CORTEX.md").unlink()
+        warnings = []
+        check_brain.check_load(warnings)
+        self.assertEqual(warnings, [])
+
     def test_clean_vault_passes(self):
         code, out = self.run_checks()
         self.assertEqual(code, 0, out)

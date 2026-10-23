@@ -6,7 +6,7 @@ python scripts/check_brain.py FILE...   only these files
 python scripts/check_brain.py --hook    Claude Code PostToolUse hook: checks the file just written
 
 Errors: dead wikilinks and heading links, ambiguous bare-name links, tracked notes linking to personal notes, hard wraps, em dashes, chatbot residue, missing tags, SYNAPSE IDs.
-Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, links that leave the tree, orphan notes, personal sections over the size cap, two notes on one subject (the same name in one scope), knowledge notes without sources, and active project hubs not updated for a month.
+Warnings: slop-list hits (they mark a passage to test, not a verdict), repeated long lines, links that leave the tree, orphan notes, personal sections over the size cap, two notes on one subject (the same name in one scope), knowledge notes without sources, always-loaded or area notes over their token cap, and active project hubs not updated for a month.
 Exit: 0 no errors, 1 errors, 2 errors in --hook mode (Claude Code shows them to Claude).
 """
 import datetime
@@ -32,6 +32,10 @@ HEADING = re.compile(r"#{1,6}\s+(.*)")
 BLOCK = re.compile(r"\s*([#>|*+-]|\d+\.\s|<!--)")
 LINK = re.compile(r"\[\[([^\]|#\\]+)(?:#([^\]|\\]+))?")
 SECTION_CAP = 150
+CHARS_PER_TOKEN = 4  # rough estimate, no tokenizer needed
+LOAD_CAP = 5000  # tokens: CORTEX plus the instructions index, read every session
+AREA_CAP = 1600  # tokens: one instructions area file, read per task
+ALWAYS_LOADED = ("CORTEX.md", "NEOCORTEX/INSTRUCTIONS/INSTRUCTIONS.md")
 CODE_SPAN = re.compile(r"`[^`]*`")
 QUOTED = re.compile("\"[^\"]*\"|“[^”]*”")
 RESIDUE = re.compile(r"oaicite|contentReference\[|utm_source=chatgpt\.com|\[cite:\s*\d+\]|\[Your Name\]|lorem ipsum", re.I)
@@ -286,6 +290,23 @@ def check_health(files, warnings, today=None):
                     warnings.append(f"{rel(path)}: active project hub not updated {since}: refresh ## Now or change its Status")
 
 
+def tokens(path):
+    """Approximate token count of a file."""
+    return len(path.read_text(encoding="utf-8")) // CHARS_PER_TOKEN
+
+
+def check_load(warnings):
+    """Warn when what loads every session, or one area file, outgrows its token budget."""
+    present = [ROOT / name for name in ALWAYS_LOADED if (ROOT / name).is_file()]
+    total = sum(tokens(p) for p in present)
+    if total > LOAD_CAP:
+        warnings.append(f"always-loaded notes (CORTEX + instructions index) are about {total} tokens (cap {LOAD_CAP}): trim them")
+    for path in sorted((ROOT / "NEOCORTEX" / "INSTRUCTIONS").glob("*.md")):
+        size = tokens(path)
+        if path.name != "INSTRUCTIONS.md" and size > AREA_CAP:
+            warnings.append(f"{rel(path)}: about {size} tokens (cap {AREA_CAP}): trim or split it")
+
+
 def main():
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -313,6 +334,7 @@ def main():
         check_orphans(files, linked, warnings)
         check_prefrontal(warnings)
         check_health(files, warnings)
+        check_load(warnings)
     out = sys.stderr if hook else sys.stdout
     for line in errors + warnings:
         print(line, file=out)

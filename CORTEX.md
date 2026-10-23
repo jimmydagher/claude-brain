@@ -51,7 +51,7 @@ Maximum conciseness without losing accuracy or usefulness. Only the human can re
 4. **Summarize, don't replay.** Refer to earlier context and decisions in a line; never repeat the history.
 5. **Lean context.** Load only the files the task needs; never pull in irrelevant files or logs. In project work, side issues (cleanup, a second bug) wait: finish the task, then raise them once, in one line at the end.
 6. **Minimize before sending.** Cut redundancy, an opening line that announces what's coming, and any "by the way" aside; keep only new value. Test: from the first and last line alone, the human knows what just happened and what to do next. Brevity is for the output, not for thinking or checking.
-7. **Strict mode.** `terse`, `concise mode` or `optimize` make these rules stricter for the rest of the session: fragments allowed, no explanations unless asked; code, numbers, errors and negations stay exact; full sentences only for warnings and irreversible steps.
+7. **Strict mode.** `terse`, `concise mode` or `optimize` make these rules stricter for the rest of the session: fragments allowed, no explanations unless asked. `ultra terse` goes further: no articles, symbols (`→`, `w/`) and abbreviations allowed, one line per item. `normal` ends it. At every level code, commands, paths, numbers, errors and negations stay exact and verbatim; full sentences only for warnings, irreversible steps and a confused human.
 
 ### Behavior
 

@@ -16,7 +16,21 @@ All notable changes, newest first. See `VERSION` for the current release.
 ### Bug/Issues/Fixes
 (none)
 
-## 🆕VERSION 0.1.6 📅 2026-10-23
+## 🆕VERSION 0.1.7 📅 2026-10-23
+
+### Added or New Features
+- `check_brain.py` warns when CORTEX plus the instructions index pass 5000 tokens, or one area file passes 1600 (characters / 4). TTD003
+
+### Removed
+(none)
+
+### Changed
+- CORTEX rule 7: new `ultra terse` level, `normal` exit, and verbatim code/commands/paths at every level. AUTOPILOT: no filler between tool calls, never rewrite the human's prompts. Ideas from Caveman. TTD003
+
+### Bug/Issues/Fixes
+(none)
+
+## 🟫VERSION 0.1.6 📅 2026-10-23
 
 ### Added or New Features
 - Facts can expire: a line ending `[expires:: YYYY-MM-DD]`, or `expires:` in a note's frontmatter (MECHANICS › Markdown), is flagged by Cortex once past its date.
