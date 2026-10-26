@@ -16,7 +16,21 @@ All notable changes, newest first. See `VERSION` for the current release.
 ### Bug/Issues/Fixes
 (none)
 
-## 🆕VERSION 0.1.7 📅 2026-10-23
+## 🆕VERSION 0.1.8 📅 2026-10-26
+
+### Added or New Features
+(none)
+
+### Removed
+- Removed `.claude/settings.json` _(from the diff)_
+
+### Changed
+(none)
+
+### Bug/Issues/Fixes
+(none)
+
+## 🟥VERSION 0.1.7 📅 2026-10-23
 
 ### Added or New Features
 - `check_brain.py` warns when CORTEX plus the instructions index pass 5000 tokens, or one area file passes 1600 (characters / 4). TTD003
